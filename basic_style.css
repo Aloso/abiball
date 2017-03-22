@@ -1,0 +1,185 @@
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+    background: url('resources/background1.jpg') center;
+    background-size: cover;
+}
+
+#header1 {
+    color: white;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    margin: 25px;
+}
+
+#header1 h1 {
+    margin: 0;
+    padding: 0 0 0.15em 0;
+    display: inline-block;
+    font-size: 2.8em;
+    font-weight: 100;
+}
+
+#header1 h2 {
+    margin: 0;
+    padding: 0.3em 0 0 0;
+    font-size: 1.35em;
+    display: inline-block;
+    border-top: 3px dotted white;
+}
+
+.message {
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 500px;
+    background-color: #FFECCC;
+    background-color: rgba(255, 236, 204, 0.67);
+    font-size: 1.2em;
+    text-align: center;
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.message.error {
+    background-color: #FFB5BA;
+    background-color: rgba(255, 181, 186, 0.67);
+}
+
+#loginBox {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    background: url("resources/background5.png");
+    background-repeat: repeat;
+    background: rgba(255,255,255,0.69);
+    font-size: 120%;
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+#loginBox h3 {
+    margin: 0 0 0.3em 0;
+}
+
+#loginBox input[type=text], #loginBox input[type=password] {
+    box-sizing: border-box;
+    margin-bottom: 0.2em;
+    border: 1px solid rgb(180, 180, 180);
+    background-color: rgba(255,255,255,0.74);
+    border-radius: 3px;
+    font-size: 100%;
+    font-family: 'Roboto', sans-serif;
+    width: 300px;
+    padding: 2px 5px;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+#loginBox input[type=text]:hover, #loginBox input[type=password]:hover {
+    border-color: #0D62D4;
+}
+
+#loginBox input[type=text]:focus, #loginBox input[type=password]:focus {
+    border-color: #0D62D4;
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 75, 184, 0.6);
+    -moz-box-shadow: inset 0 0 3px rgba(0, 75, 184, 0.6);
+    box-shadow: inset 0 0 3px rgba(0, 75, 184, 0.6);
+    outline: none;
+}
+
+#loginBox input[type=submit] {
+    border: 1px solid #0D62D4;
+    background-color: #3682e9;
+    border-radius: 3px;
+    color: white;
+    padding: 6px 8px;
+    font-size: 100%;
+    font-family: 'Roboto', sans-serif;
+    margin: 0.5em 0 0 0;
+}
+
+#loginBox input[type=submit]:hover {
+    background-color: #0D62D4;
+}
+
+a.button {
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid #aaaaaa;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 95%;
+    font-family: Roboto, sans-serif;
+    outline-offset: -5px;
+}
+
+a.button:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+    
+    #header1 h1 {
+        font-size: 2.3em;
+    }
+    #header1 h2 {
+        font-size: 1.15em;
+        border-top: none;
+    }
+    
+    #loginBox {
+        width: auto;
+        left: 25px;
+    }
+    
+    #loginBox input[type=text], #loginBox input[type=email], #loginBox input[type=password] {
+        width: 100%;
+    }
+    
+}
+
+@media (max-height: 450px) and (min-width: 600px) {
+    
+    #header1 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 350px;
+        bottom: 0;
+    }
+    
+    #header1 h1 {
+        font-size: 2.3em;
+    }
+    #header1 h2 {
+        font-size: 1.15em;
+        border-top: none;
+    }
+    
+    #loginBox {
+        font-size: 100%;
+        bottom: -5px;
+    }
+}

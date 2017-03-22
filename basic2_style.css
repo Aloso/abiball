@@ -1,0 +1,405 @@
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border: none;
+}
+
+table th, table td {
+    border: 1px solid #cccccc;
+    padding: 3px 5px;
+    background-color: white;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+    background: url('resources/background2.jpg') center;
+    background-size: cover;
+}
+
+#header1 {
+    color: white;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    margin: 20px;
+}
+
+#header1 h1 {
+    margin: 0;
+    padding: 0 0 0.15em 0;
+    display: inline-block;
+    font-size: 2.8em;
+    font-weight: 100;
+}
+
+#header1 h2 {
+    margin: 0;
+    padding: 0.3em 0 0 0;
+    font-size: 1.35em;
+    display: inline-block;
+    border-top: 3px dotted white;
+}
+
+.message {
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 500px;
+    background-color: rgba(255, 236, 204, 0.67);
+    font-size: 1.2em;
+    text-align: center;
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+#content .message {
+    margin: 1em 0;
+    max-width: none;
+    padding: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.38);
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.message.error {
+    background-color: rgba(255, 181, 186, 0.67);
+}
+
+.message.success {
+    background-color: rgba(213, 251, 205, 0.67);
+}
+
+#rightTop {
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding: 10px 20px;
+    background: url("resources/background4.png");
+    background: rgba(0,0,0,0.67);
+    color: white;
+    text-align: right;
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    margin-left: -300px;
+    width: 650px;
+    background: #464646;
+    background: url("resources/background4.png");
+    background: rgba(0,0,0,0.67);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 120%;
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#footer a, #rightTop a {
+    display: inline-block;
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+    text-shadow: 0 0 5px #df8e7c, 0 0 3px #ffd2b4;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+#footer a:hover, #rightTop a:hover {
+    text-shadow: none;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+#rightTop a {
+    font-size: 120%;
+    margin: 0 0 0 20px;
+}
+
+#content {
+    position: fixed;
+    top: 150px;
+    bottom: 70px;
+    background: url("resources/background5.png");
+    background: rgba(255, 255, 255, 0.87);
+    overflow: auto;
+    padding: 20px;
+    width: 900px;
+    left: 50%;
+    margin-left: -470px;
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+#content p:first-child,
+#content h1:first-child, #content h2:first-child, #content h3:first-child,
+#content .message:first-child {
+    margin-top: 0;
+}
+
+#content p, #content > ul, #content > ol {
+    font-size: 120%;
+    margin: 1em 0;
+}
+
+#content li {
+    margin: 0.3em 0;
+}
+
+#content input[type=text], #content input[type=password], #content input[type=email] {
+    border: 1px solid #aaaaaa;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 95%;
+    font-family: Roboto, sans-serif;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+}
+
+#content input[type=text]:hover, #content input[type=password]:hover, #content input[type=email]:hover {
+    border-color: rgb(0, 107, 255);
+}
+
+#content input[type=text]:focus, #content input[type=password]:focus, #content input[type=email]:focus {
+    border-color: rgb(0, 107, 255);
+    box-shadow: inset 0 0 3px rgba(0, 107, 255, 0.74);
+}
+
+#content input[type=submit] {
+    border: 1px solid #0063e6;
+    background-color: rgb(49, 127, 255);
+    color: white;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 95%;
+    font-family: Roboto, sans-serif;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+    outline-offset: -5px;
+}
+
+#content input[type=submit]:hover {
+    background-color: rgb(25, 106, 241);
+}
+
+#content input[type=submit]:focus {
+    outline: white dotted 1px;
+}
+
+#content .labelText {
+    display: inline-block;
+    min-width: 180px;
+}
+
+#content .errorP {
+    background-color: #ffb5aa;
+    background: rgba(255, 175, 169, 0.72);
+    padding: 10px;
+}
+
+#content a, #content a:visited {
+    color: rgb(215, 66, 0);
+    text-shadow: 0 1px 0 white, 0 -1px 4px white;
+    text-decoration: none;
+}
+
+#content a:hover, #content a:active {
+    text-decoration: underline;
+}
+
+#content a.button {
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid #aaaaaa;
+    background-color: rgb(255, 255, 255);
+    text-shadow: none;
+    color: black;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 95%;
+    font-family: Roboto, sans-serif;
+    outline-offset: -5px;
+}
+
+#content a.button:hover {
+    text-decoration: underline;
+}
+
+#content a.button.primary {
+    border: 1px solid #0063e6;
+    background-color: rgb(49, 127, 255);
+    color: white;
+}
+
+#content a.button.primary:hover {
+    background-color: rgb(25, 106, 241);
+}
+
+#content fieldset {
+    padding: 20px;
+    border: 1px solid gray;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.8);
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+textarea.fullWidthTA {
+    height: 3em;
+    width: 100%;
+    width: calc(100% - 12px);
+    margin: 0.5em 0;
+    background-color: white;
+    border: 1px solid #bbbbbb;
+    padding: 3px 5px;
+    font-family: Roboto, sans-serif;
+    font-size: 100%;
+    resize: vertical;
+}
+
+.pageText {
+    font-size: 120%;
+}
+
+.pageText > p, .pageText > ul, .pageText > ol, .pageText > table, .pageText > blockquote {
+    font-size: 100%;
+}
+
+.pageText > h1 {
+    font-size: 1.66em;
+}
+
+.pageText > h2 {
+    font-size: 1.33em;
+}
+
+.pageText > h3 {
+    font-size: 1.15em;
+}
+
+
+@media (max-width: 940px) {
+    
+    #content {
+        padding: 15px;
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        left: auto;
+        margin-left: 0;
+    }
+    
+    #content fieldset {
+        padding: 15px;
+    }
+    
+}
+
+@media (max-width: 800px) {
+    
+    #content {
+        padding: 15px;
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        left: auto;
+        margin-left: 0;
+        top: 70px;
+        bottom: 41px;
+    }
+    
+    #content p {
+        font-size: 110%;
+    }
+    
+    .pageText {
+        font-size: 110% !important;
+    }
+    
+    #rightTop {
+        padding: 7px 8px;
+        font-size: 83%;
+    }
+    
+    #footer a, #rightTop a {
+        margin: 0 7px;
+    }
+    
+    #footer, #rightTop a {
+        font-size: 105% !important;
+    }
+    
+    #header1 {
+        position: absolute;
+        left: 0;
+        right: 220px;
+        margin: 10px;
+    }
+    
+    #header1 h1 {
+        font-size: 1.35em;
+        line-height: 1.15em;
+    }
+    
+    #header1 h2 {
+        display: none;
+    }
+    
+    #footer {
+        left: 0;
+        margin-left: 0;
+        width: 100%;
+        height: 41px;
+        padding: 0;
+        overflow: auto;
+    }
+    
+    #footer #footerInner {
+        width: 550px;
+        text-align: left;
+        padding: 10px;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    
+    #content .labelText {
+        display: block;
+    }
+    
+}
