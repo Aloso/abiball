@@ -3,7 +3,9 @@ Eine Website zur Kartenbestellung &amp; Organisation von Abibällen
 
 ## Idee und Entwicklung
 Diese Website wurde erstellt, um den Organisationsaufwand für den diesjährigen Abiball weitestgehend in Grenzen zu halten
-und um auf das ewige Listenführen verzichten zu können. Matthias Kammüller hat für diesen Zweck eine Website in PHP programmiert. Ich habe im Jahr darauf die Website verbessert und nun fast komplett neu geschrieben, da sich einige Fehler eingeschlichen haben und das Projekt unübersichtlich geworden ist. Ich habe das Aussehen größtenteils übernommen und die PDF-Rechnung angepasst, ansonsten ist alles neu.
+und um auf das ewige Listenführen verzichten zu können. Matthias Kammüller hat für diesen Zweck eine Website in PHP programmiert.
+
+Ich habe im Jahr darauf die Website verbessert und nun fast komplett neu geschrieben, da sich einige Fehler eingeschlichen haben und das Projekt unübersichtlich geworden ist. Ich habe das Aussehen größtenteils übernommen und die PDF-Rechnung angepasst, ansonsten ist alles neu. Ich habe mich besonders bemüht, die Website flexibel zu gestalten (viele Einstellungsmöglichkeiten in der Admin-Konsole) und sie übersichtlicher zu machen.
 
 ## Voraussetzungen & Installation
 Dieses Paket benötigt einen Server mit:
