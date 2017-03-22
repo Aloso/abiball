@@ -92,4 +92,4 @@ Hinweise dazu finden Sie im Impressum.
 * ReCaptcha verwenden
 * Passwort zurücksetzen (momentan erhält man beim Klick auf "Passwort zurücksetzen" die Information, man möge doch den Webmaster anmailen)
 * Kontaktformular im Impressum (weniger wichtig, da die E-Mailadresse vorhanden ist)
-* FAQ Seite
+* FAQ Seite (Wird erst benötigt, wenn man _Frequently Asked Questions_ hat)
