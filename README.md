@@ -82,3 +82,11 @@ Es ist darüberhinaus möglich, in verschiedenen Bestellrunden verschiedene Prei
 Die Website benutzt ausschließlich selber produziertes Material oder solches, dass Lizenzfrei (oder unter freien Lizenzen) zu haben ist.
 
 Hinweise dazu finden Sie im Impressum.
+
+## TODO
+
+* ReCaptcha verwenden
+* Passwort zurücksetzen (momentan erhält man beim Klick auf "Passwort zurücksetzen" die Information, man möge doch den Webmaster anmailen)
+* Kontaktformular im Impressum (weniger wichtig, da die E-Mailadresse vorhanden ist)
+* FAQ Seite
+* Admin-Bereich: Bestellung löschen
