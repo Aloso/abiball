@@ -1,7 +1,6 @@
 # Abiball-Kartenbestellungen
 Eine Website zur Kartenbestellung &amp; Organisation von Abibällen
 
-
 ## Idee und Entwicklung
 Diese Website wurde erstellt, um den Organisationsaufwand für den diesjährigen Abiball weitestgehend in Grenzen zu halten
 und um auf das ewige Listenführen verzichten zu können. Matthias Kammüller hat für diesen Zweck eine Website in PHP programmiert. Ich habe im Jahr darauf die Website verbessert und nun fast komplett neu geschrieben, da sich einige Fehler eingeschlichen haben und das Projekt unübersichtlich geworden ist. Ich habe das Aussehen größtenteils übernommen und die PDF-Rechnung angepasst, ansonsten ist alles neu.
@@ -9,11 +8,11 @@ und um auf das ewige Listenführen verzichten zu können. Matthias Kammüller ha
 ## Voraussetzungen & Installation
 Dieses Paket benötigt einen Server mit:
 -	PHP5- oder PHP7-Unterstützung 
--	Eine leere MySQL-Datenbank
+-	Eine leere MySQL- oder MariaDB-Datenbank
 -	Eine Domain oder Subdomain, auf der der Inhalt läuft (dies muss KEIN Root-Verzeichnis sein)
 -	Eine Domain, auf die zugegriffen werden soll
 
-## Zur Installation müssen Sie folgende Schritte vollführen:
+## Installation
 1.  Hochladen der Dateien auf einen Webserver
 2.  Erstellen einer MySql- oder MariaDB-Datenbank und eines zugehörigen DB-Nutzers
 3.  Öffnen der Datei „settings.inc.php“ im Ordner „resources“ und einstellen des Datenbankzugangs an folgender Stelle:
@@ -39,14 +38,12 @@ Ein User hat auf der Website folgende Möglichkeiten:
 
 * Account registrieren und mit E-Mail verifizieren
 * Anmelden, Abmelden
-* Links aufrufen: Startseite, Kartenbestellung, Forum, Location, Menü, Impressum, Profil, Logout
 * Startseite: Neuigkeiten lesen
 * Kartenbestellung: Informationen lesen, Karte für sich bestellen, danach Karten für andere bestellen
-* Forum: Forenbeiträge lesen und schreiben. Es wird **fetter Text** und __kursiver Text__ unterstützt.
-* Location: Standortinformation lesen, Google Maps Karte  ansehen, zoomen, etc.
-* Menü: Informationen lesen
-* Impressum: Informationen lesen, Webmaster per E-Mail kontaktieren
-* Profil: Passwort / E-Mailadresse ändern, Empfänger von bestellten Karten ändern
+* Forum: Forenbeiträge lesen und schreiben. Es wird &#42;&#42;fetter Text&#42;&#42; und &#95;&#95;kursiver Text&#95;&#95; unterstützt.
+* Location: Google Maps Karte ansehen, zoomen, etc.
+* Impressum: Webmaster per E-Mail kontaktieren
+* Profil: Passwort / E-Mailadresse ändern, Empfänger von bestellten Karten ändern, Rechnung als PDF speichern
 
 ### Admin-Bereich
 
