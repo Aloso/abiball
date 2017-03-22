@@ -59,7 +59,8 @@ if (isset($_GET['ordered'])) {
 
 if ($bestellungen != '0') {
     echo '<p>Sie haben bisher ' . $bestellungen . ' Karte(n) bestellt. Im
-            <a href="profil.php">Profil</a> werden alle Ihre Bestellungen angezeigt.</p>';
+            <a href="profil.php">Profil</a> werden alle Ihre Bestellungen angezeigt.</p>
+            <a class="button primary" href="rechnung.php">Rechnung als PDF-Dokument speichern</a>';
 }
 
 
@@ -113,8 +114,7 @@ if ($meta['currentRound'] == 0) {
             </form><br><br>';
             
         } else {
-            echo '<p>Sie dürfen in dieser Bestellrunde keine Karten mehr bestellen.</p>
-            <a class="button primary" href="index.php">Zur Startseite</a>';
+            echo '<p>Sie dürfen in dieser Bestellrunde keine Karten mehr bestellen.</p>';
         }
         
     } else {
@@ -157,8 +157,7 @@ if ($meta['currentRound'] == 0) {
             </form><br><br>';
         
         } else {
-            echo '<p>Sie dürfen in dieser Bestellrunde keine Karten mehr bestellen.</p>
-            <a class="button primary" href="index.php">Zur Startseite</a>';
+            echo '<p>Sie dürfen in dieser Bestellrunde keine Karten mehr bestellen.</p>';
         }
     }
     

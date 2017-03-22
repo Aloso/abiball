@@ -14,7 +14,8 @@ $bestellungen = $anz->fetch_assoc()['COUNT(*)'];
 
 if ($bestellungen != '0') {
     echo '<p>Sie haben bisher ' . $bestellungen . ' Karte(n) bestellt. Im
-            <a href="profil.php">Profil</a> werden alle Ihre Bestellungen angezeigt.</p>';
+            <a href="profil.php">Profil</a> werden alle Ihre Bestellungen angezeigt.</p>
+            <a class="button primary" href="rechnung.php">Rechnung als PDF-Dokument speichern</a>';
 }
 
 
@@ -67,8 +68,11 @@ if ($meta['currentRound'] == 0) {
             </p><p>
                 Es sind noch <b>' . $anz . ' Karten</b> übrig.
             </p>';
-            
-            include 'resources/wissenswertesZurBestellung.php';
+    
+            $data = $mysqli->query("SELECT * FROM seitentexte WHERE name = 'Bestellung'");
+            if (($row = $data->fetch_assoc()) != null) {
+                echo '<div class="pageText">' . $row['htmlText'] . '</div>';
+            }
             
             echo '<form action="bestellung2.php">
                 <input type="submit" value="Akzeptieren und fortfahren">

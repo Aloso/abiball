@@ -64,16 +64,16 @@ if (isset($_GET['sortby'])) {
         case 'b.name':
         case 'b.bezahlt':
         case 'b.status':
-            $sort =  'ORDER BY ' . $sortby;
+            $sort =  ' ORDER BY ' . $sortby;
             break;
         case 'b.preis':
         case 'b.bestelltAm':
         case 'b.bezahltAm':
-            $sort =  'ORDER BY ' . $sortby . ' DESC';
+            $sort =  ' ORDER BY ' . $sortby . ' DESC';
     }
 }
 
-$alleBestellungen = $mysqli->query('SELECT u.id, u.vorname, u.nachname, b.* FROM bestellungen b LEFT JOIN user u ON b.userID = u.id ' . $sort);
+$alleBestellungen = $mysqli->query('SELECT u.id, u.vorname, u.nachname, b.* FROM bestellungen b LEFT JOIN user u ON b.userID = u.id' . $sort);
 if ($alleBestellungen === false) {
     echo '<p><b>Fehler:</b> ' . $mysqli->error . '</p>';
 } else {
