@@ -25,7 +25,7 @@ echo '<h1>Bestellübersicht</h1>
         <th><a href="?sortby=b.bestelltAm">Bestellt am</a></th>
         <th><a href="?sortby=b.bezahltAm">Bezahlt am</a></th>
         <th><a href="?sortby=b.preis">Preis</a></th>
-        <th></th>
+        <th>Zahlung registrieren<br>Bestellung löschen</th>
     </tr>';
 
 if (isset($_POST['zahlungRegistrieren'])) {
@@ -38,6 +38,18 @@ if (isset($_POST['zahlungRegistrieren'])) {
         echo '<p>Die Zahlung wurde registriert.</p>';
     } else {
         echo '<p><b>Fehler</b> beim Registrieren der Zahlung!</p>';
+    }
+}
+
+if (isset($_POST['loeschen'])) {
+    $id = $mysqli->real_escape_string($_POST['loeschen']);
+    $timeNow = time();
+    
+    $success = $mysqli->query("DELETE FROM bestellungen WHERE id = $id");
+    if ($success) {
+        echo '<p>Die Bestellung wurde gelöscht.</p>';
+    } else {
+        echo '<p><b>Fehler</b> beim Löschen der Bestellung!</p>';
     }
 }
 
@@ -85,13 +97,16 @@ if ($alleBestellungen === false) {
             <td>";
         
         if ($bezahlt == '') {
-            echo "<form action='bestelluebersicht.php' method='post'>
+            echo "<form action='bestelluebersicht.php' method='post' style='display:inline'>
                 <input type='hidden' name='zahlungRegistrieren' value='$row[id]'>
-                <input type='submit' value='Zahlung registr.' style='padding: 1px 8px'>
+                <input type='submit' value='Bezahlt' style='padding: 1px 8px'>
             </form>";
         }
         
-        echo '</td></tr>';
+        echo "<form action='bestelluebersicht.php' method='post' style='display:inline'>
+            <input type='hidden' name='loeschen' value='$row[id]'>
+            <input type='submit' value='Löschen' class='secondary' style='padding: 1px 8px'>
+        </form></td></tr>";
     }
     
 }
