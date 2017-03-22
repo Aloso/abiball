@@ -39,6 +39,8 @@ Dieses Paket benötigt einen Server mit:
 Ein User hat auf der Website folgende Möglichkeiten:
 
 * Account registrieren und mit E-Mail verifizieren
+
+  Voraussetzung: Ein Admin hat den Account bereits erstellt. Dadurch sind nur bestimmte Personen zugelassen.
 * Anmelden, Abmelden
 * Startseite: Neuigkeiten lesen
 * Kartenbestellung: Informationen lesen, Karte für sich bestellen, danach Karten für andere bestellen
