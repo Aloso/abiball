@@ -9,7 +9,7 @@ Ich habe im Jahr darauf die Website verbessert und nun **fast komplett neu gesch
 
 ## Voraussetzungen & Installation
 Dieses Paket benötigt einen Server mit:
--	PHP5- oder PHP7-Unterstützung
+-	PHP5- oder PHP7-Unterstützung 
 -	Eine leere MySQL- oder MariaDB-Datenbank
 -	Eine Domain oder Subdomain, auf der der Inhalt läuft (dies muss KEIN Root-Verzeichnis sein)
 -	Eine Domain, auf die zugegriffen werden soll
@@ -19,17 +19,17 @@ Dieses Paket benötigt einen Server mit:
 1.  Hochladen der Dateien auf einen Webserver
 2.  Erstellen einer MySql- oder MariaDB-Datenbank und eines zugehörigen DB-Nutzers
 3.  Öffnen der Datei „settings.inc.php“ im Ordner „resources“. Einstellen der Passwörter an folgender Stelle:
-
+    
         define("DefaultPassword", "Abitur17");   // Voreingestelltes Passwort der Accounts
         define("WebmasterPassword", "secret");   // Passwort für den Gmail Account
-
+    
     Einstellen des Datenbankzugangs an folgender Stelle:
 
         define("DbHost",     "localhost");
         define("DbDatabase", "abiball");
         define("DbUsername", "php_abiball");
         define("DbPassword", "uxvHi9FGbNXkLXd1");
-
+    
 4.  Ausführen der SQL-Anfrage in der .sql Datei, die sich im selben Ordner befindet
 5.  Wechseln zur Tabelle „user“ und Ändern des Vornamen, Nachnamen und der E-Mailadresse
 6.  Anmeldung auf der Website mit dem neu eingestellten Namen und dem Passwort „adminadmin“
@@ -37,8 +37,8 @@ Dieses Paket benötigt einen Server mit:
 8.  Wechseln in den Admin-Bereich, zu „Einstellungen“ und Anpassen der Werte
 
     Achte darauf, dass bei „Webmaster E-Mail“ eine Gmail-Adresse steht.
-    Bei dieser musst du unter https://www.google.com/settings/security/lesssecureapps
-    **unsichere Anwendungen zulassen**!
+    Bei dieser müssen unter https://www.google.com/settings/security/lesssecureapps
+    **weniger sichere Apps aktiviert werden**! 
 9.  Wechseln zu „Seitentexte“ und Anpassen der Texte
 10. Wechseln zu „User“. Alle Abiturienten müssen manuell hinzugefügt werden.
 
@@ -66,7 +66,7 @@ Der Admin hat alle Möglichkeiten, die ein User hat. Zusätzlich hat er folgende
 * Accounts erstellen (damit ein User seinen Account registrieren kann, muss er zuvor von einem Admin erstellt worden sein)
 * Alle User tabellarisch sehen. Auf Spaltenname klicken, um sie zu sortieren (so kann man besonders schnell einen Namen oder eine E-Mailadresse finden. Man kann User nach Rechten filtern und sehen, wer zuletzt online war und wann)
 * Auf Nachname klicken, um dessen Profil zu ändern. Insbesondere kann man
-
+  
   * E-Mailadresse ändern
   * Status ändern (Vorsicht!)
   * Passwort ändern
@@ -84,13 +84,11 @@ Die Website ist für mobile Geräte verschiedener Größen optimiert. Keine Umle
 ## Bestellprozess
 Die Bestellung kann der Administrator individuell gestalten. Er kann sowohl festlegen, wie viele Karten er zum Verkauf freigibt, als auch, ob jeder so viele Karten bestellen darf oder ob insgesamt so viel Karten bestellt werden dürfen.
 
-Die Bestellung läuft in mehreren Bestellrunden ab. Das hat den Vorteil, dass der Administrator in Bestellrunde 2 andere Einstellungen verwenden kann als in Bestellrunde 2.
+Die Bestellung läuft in mehreren Bestellrunden ab. Das hat den Vorteil, dass der Administrator in Bestellrunde 2 andere Einstellungen verwenden kann als in Bestellrunde 1.
 
 ### Beispiel:
 
 Es gibt 150 Abiturienten und 700 Karten, d.h. jedem Abiturienten stehen mindestens 4 Karten zu. Es wird also eingestellt, dass in der 1. Bestellrunde jeder Nutzer bis zu 4 Karten bestellen kann. Da im Durchschnitt 3,5 Karten bestellt werden, bleiben 175 Karten übrig. Diese werden in den folgenden Runden freigegeben, wobei jeder Nutzer so viele Karten bestellen darf wie er will, bis der Vorrat aufgebraucht ist.
-
-Es ist darüberhinaus möglich, in verschiedenen Bestellrunden verschiedene Preise einzustellen.
 
 ## Rechte & Werbung
 Die Website benutzt ausschließlich selber produziertes Material oder solches, dass Lizenzfrei (oder unter freien Lizenzen) zu haben ist.
@@ -101,5 +99,4 @@ Hinweise dazu finden Sie im Impressum.
 
 * ReCaptcha verwenden
 * Passwort zurücksetzen (momentan erhält man beim Klick auf "Passwort zurücksetzen" die Information, man möge doch den Webmaster anmailen)
-* Kontaktformular im Impressum (weniger wichtig, da die E-Mailadresse vorhanden ist)
 * FAQ Seite (Wird erst benötigt, wenn man _Frequently Asked Questions_ hat)
