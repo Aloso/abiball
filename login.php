@@ -17,6 +17,12 @@ if (isset($_GET['error'])) {
         case 'blocked':
             $errorMessage = 'Sie wurden blockiert.';
             break;
+        case 'notAuthorizedToReset':
+            $errorMessage = 'Sie können Ihr Passwort nicht zurücksetzen, bevor Sie sich das erste Mal angemeldet haben.';
+            break;
+        case 'resetEmailSent':
+            $errorMessage = 'Die E-Mail zum Zurücksetzen Ihres Passwortes konnte nicht versendet werden.';
+            break;
         case 'invalidData':
             $errorMessage = 'Die angegebenen Daten sind ungültig.';
             break;
@@ -24,13 +30,21 @@ if (isset($_GET['error'])) {
             $errorMessage = 'Bitte alle Felder ausfüllen!';
             break;
     }
-    
     echo '<div class="message error">' . $errorMessage . '</div>';
+    
 } else if (isset($_GET['message'])) {
+    
     $message = $_GET['message'];
-    if ($message == 'sessionExpired') {
-        echo '<div class="message">Sie waren zu lange inaktiv und<br>wurden automatisch ausgeloggt.</div>';
+    switch ($message) {
+        case 'sessionExpired':
+            $message = 'Sie waren zu lange inaktiv und<br>wurden automatisch ausgeloggt.';
+            break;
+        case 'resetEmailSent':
+            $message = 'Die E-Mail zum Zurücksetzen<br>Ihres Passwortes wurde abgesendet.';
+            break;
     }
+    echo '<div class="message">' . $message . '</div>';
+    
 } else if (isset($loggedout)) {
     echo '<div class="message">Sie wurden ausgeloggt.</div>';
 }

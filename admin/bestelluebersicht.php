@@ -88,7 +88,7 @@ if ($alleBestellungen === false) {
             <td>{$row['id']}</td>
             <td>$row[round]</td>
             <td " . ($row['nachname'] == null ? 'class="redBg" title="Dieser Nutzer existiert nicht"' : '') . ">$row[userID]</td>
-            <td>$row[vorname] $row[nachname]</td>
+            <td><a href='user.php?id=$row[userID]'>$row[vorname] $row[nachname]</a></td>
             <td>$row[name]</td>
             <td>$bezahlt</td>
             <td>$bestelltAm</td>

@@ -24,7 +24,7 @@ function phpmailerSend($adress, $subject, $htmlMailBody, $mailBody = '') {
     
     $mail->isHTML(true);                                  // Set email format to HTML
     
-    $mail->Subject = $subject;
+    $mail->Subject = utf8_decode($subject);
     $mail->Body = '<html>
 <head>
     <title>Aktivieren Sie Ihren Account</title>

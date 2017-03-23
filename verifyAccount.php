@@ -35,7 +35,7 @@ if (($row = $user->fetch_assoc()) != null) {
         }
         
     } else {
-        echo '<div class="error message">Der Aktivierunglink ist nicht ungültig!</div>
+        echo '<div class="error message">Der Aktivierunglink ist nicht gültig!</div>
                 <a class="button primary" href="index.php">Startseite</a>';
     }
     

@@ -159,7 +159,55 @@ if (isset($_GET['id'])) {
             <span class='labelText'></span> <b>Warnung:</b> Das Zurücksetzen / Löschen löscht auch die zugehörigen
             Kartenbestellungen.
         </p>";
+        
+        echo '<h2>Bestellte Karten</h2>';
+        
+        $data = $mysqli->query("SELECT * FROM bestellungen WHERE userID = $u_id ORDER BY bezahlt");
+        if ($data->num_rows == 0) {
+            echo '<p>Keine Bestellungen gefunden.</p>';
+        } else {
+            $mahnungMoeglich = false;
+            
+            echo '<table>
+    <tr><th>Name</th><th>Preis</th><th>Bestellt am</th><th>Bezahlt</th><th></th></tr>';
+        
+            while (($row = $data->fetch_assoc()) != null) {
+                $bestelltAm = date("d. m. Y  H:m", $row['bestelltAm']);
+            
+                echo '<tr>
+                    <td>' . $row['name'] . '</td>
+                    <td>' . $row['preis'] . ' Euro</td>
+                    <td>' . $bestelltAm . ' Uhr</td>
+                    <td>' . ($row['bezahlt'] ? 'Ja' : 'Nein') . '</td>
+                    <td>';
+                
+                if (!$row['bezahlt']) {
+                    $mahnungMoeglich = true;
+                    
+                    echo "<form action='bestelluebersicht.php' method='post' style='display:inline'>
+                        <input type='hidden' name='zahlungRegistrieren' value='$row[id]'>
+                        <input type='submit' value='Zahlung registrieren'>
+                    </form>
+                    <form action='bestelluebersicht.php' method='post' style='display:inline'>
+                        <input type='hidden' name='loeschen' value='$row[id]'>
+                        <input type='submit' value='Bestellung löschen' class='secondary'>
+                    </form>";
+                }
     
+    
+                echo '</td></tr>';
+            }
+            
+            echo '</table>';
+            
+            if ($mahnungMoeglich) {
+                echo "<p><form action='mahnung.php' method='post' style='display:inline'>
+                    <input type='hidden' name='mahnen' value='$row[userID]'>
+                    <input type='submit' value='Mahnung versenden' class='secondary'>
+                </form></p>";
+            }
+        }
+        
     } else {
         $error = 'User existiert nicht';
         include 'error_message.inc.php';
