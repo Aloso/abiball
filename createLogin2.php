@@ -77,8 +77,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'nearly' &&
     <title>Aktivieren Sie Ihren Account</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,400i,700" rel="stylesheet">
 </head>
-<body bgcolor="#eaeaea" style="background-color: #eaeaea">
-<div style="font-family: \'Roboto\', \'Open Sans\', \'Helvetica Neue\', \'Arial\', sans-serif; font-size: 17px; max-width:700px; margin: 20px auto; background-color: white; border: 1px solid #dddddd; padding: 20px">
+<body>
+<div style="font-family: \'Roboto\', \'Open Sans\', \'Helvetica Neue\', \'Arial\', sans-serif; font-size: 17px; max-width:700px; margin: 15px auto; background-color: white; border: 1px solid #d7d7d7; padding: 18px">
 
     <h1 style="margin-top: 0; font-size: 30px"><span style="display:inline-block;border-bottom:5px solid #f23c00">Willkommen</span> <span style="display:inline-block;border-bottom:5px solid white">beim Abiball</span> <span style="display:inline-block;border-bottom:5px solid white">Kartenbestellsystem.</span></h1>
 
