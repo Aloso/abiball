@@ -38,9 +38,15 @@ Dieses Paket benötigt einen Server mit:
 
     Achte darauf, dass bei „Webmaster E-Mail“ eine Gmail-Adresse steht.
     Bei dieser müssen unter https://www.google.com/settings/security/lesssecureapps
-    **weniger sichere Apps aktiviert werden**! 
-9.  Wechseln zu „Seitentexte“ und Anpassen der Texte
-10. Wechseln zu „User“. Alle Abiturienten müssen manuell hinzugefügt werden.
+    **weniger sichere Apps aktiviert werden**!
+9.  Füge unter „User“ ein paar Personen zum Testen ein. Diese wirst du später wieder löschen.
+    Versuche, dich als eine der Personen anzumelden und einen Account zu erstellen.
+    Möglicherweise blockiert Google den Anmeldeversuch. Gib an, dass das du selbst warst!
+    Dann sollte beim nächsten Versuch die E-Mail zuverlässig ankommen.
+    
+    Lösche die Test-Accounts wieder.
+10. Wechsle zu „Seitentexte“ und passe die Texte nach Bedarf an.
+11. Wechsle zu „User“. Alle Abiturienten müssen manuell hinzugefügt werden.
 
 ## Funktionen
 
