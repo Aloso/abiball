@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="basic_style.css">
+    <link rel="icon" href="favicon.ico">
 </head>
 <body>
 <div id="header1">
