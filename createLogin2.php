@@ -46,27 +46,76 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'nearly' &&
                         if ($success) {
                             $_SESSION['passwort'] = $passwort;
                             $_SESSION['loggedin'] = 'nearly';
+                            
+                            $verificationLink = '';
+                            
+                            require_once 'PHPMailer-master/class.phpmailer.php';
+                            require_once 'PHPMailer-master/class.smtp.php';
+                            require_once 'PHPMailer-master/phpmailer.lang-de.php';
+                            
+                            $mail = new PHPMailer;
     
-                            $empfaenger = $email;
-                            $betreff = 'Abiball 2017 - Bestätigung Ihres Accounts';
-                            $nachricht = 'Sie erhalten diese Nachricht, weil mit Ihrer E-Mailadresse ein Account für den Kartenverkauf des Abiballs des LMGU erstellt wurde.
-
-Um den Account zu aktivieren, rufen Sie bitte folgenden Link auf:
-
-        ' . $meta['url'] . 'verifyAccount.php?id=' . $encUserID . '&verificationString=' . urlencode($vString) . '
-
-Falls dies ein Versehen ist, können Sie diese Nachricht ignorieren.';
-                            $header = 'From: ' . $meta['webmasterMail'] . "\r\n" .
-                                    'Reply-To: ' . $meta['webmasterMail'] . "\r\n" .
-                                    'X-Mailer: PHP/' . phpversion();
+                            $mail->SMTPDebug = 1;                                 // debugging: 1 = errors and messages, 2 = messages only
+                            $mail->isSMTP();                                      // Set mailer to use SMTP
+                            $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+                            $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                            $mail->Username = $meta['webmasterMail'];             // SMTP username
+                            $mail->Password = 'password';      //TODO password                   // SMTP password
+                            $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+                            $mail->Port = 465;
+                            
+                            $mail->setFrom($meta['webmasterMail']);
+                            $mail->addAddress($email);
+                            $mail->addReplyTo($meta['webmasterMail']);
+                            
+                            $mail->isHTML(true);                                  // Set email format to HTML
     
-                            if (mail($empfaenger, $betreff, $nachricht, $header)) {
-                                header('Location: unverifiedLanding.php?');
-                                exit;
-                            } else {
+                            $mail->Subject = 'Aktivieren Sie Ihren Account';
+                            // This is a really cool html E-Mail template!
+                            $mail->Body    = '<html>
+<head>
+    <title>Aktivieren Sie Ihren Account</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,400i,700" rel="stylesheet">
+</head>
+<body bgcolor="#eaeaea">
+<div style="font-family: \'Roboto\', \'Open Sans\', \'Helvetica Neue\', \'Arial\', sans-serif; font-size: 17px; max-width:700px; margin: 20px auto; background-color: white; border: 1px solid #dddddd; padding: 20px">
+
+    <h1 style="margin-top: 0; font-size: 31px"><span style="display:inline-block;border-bottom:5px solid #f23c00">Willkommen</span> <span style="display:inline-block;border-bottom:5px solid white">beim Abiball</span> <span style="display:inline-block;border-bottom:5px solid white">Kartenbestellsystem.</span></h1>
+
+    Sie sind nur noch einen Klick von Ihrem Account entfernt!<br><br><br>
+
+    <div style="text-align:center;font-size: 19px;"><a href="' . $verificationLink . '" style="color: white; background-color: #007ae6;text-decoration: none; padding: 10px 12px; border-radius: 3px; display: inline-block; border: 1px solid #06f;">Account aktivieren</a></div><br><br>
+
+    Sie haben eine Frage an uns? Schreiben Sie uns an unter
+    <a href="mailto:' . $meta['webmasterMail'] . '">' . $meta['webmasterMail'] . '</a><br><br>
+
+    <hr style="border-top:none; border-left:none; border-right:none; border-bottom: 1px solid #aaaaaa;">
+    Sie erhalten diese Nachricht, weil mit Ihrer E-Mailadresse ein Account
+    auf abiball.000webhostapp.com erstellt wurde.
+
+</div>
+</body>
+</html>';
+                            
+                            $mail->AltBody = 'Aktivieren Sie Ihren Account
+
+Sie sind nur noch einen Klick von Ihrem Account entfernt!
+
+Öffnen Sie folgenden Link, um den Account zu aktivieren: ' . $verificationLink . '
+
+Sie haben eine Frage an uns? Schreiben Sie uns an unter ' . $meta['webmasterMail'] . '
+
+Sie erhalten diese Nachricht, weil mit Ihrer E-Mailadresse ein Account auf
+abiball.000webhostapp.com erstellt wurde.';
+    
+                            if(!$mail->send()) {
                                 header('Location: unverifiedLanding.php?error=sendFailed');
                                 exit;
+                            } else {
+                                header('Location: unverifiedLanding.php');
+                                exit;
                             }
+                            
                         } else {
                             $error = 'Datenbankfehler: ' . $mysqli->error;
                             include 'error_message.inc.php';
