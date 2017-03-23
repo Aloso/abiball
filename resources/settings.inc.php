@@ -15,7 +15,8 @@
 
 // Voreingestelltes Passwort
 
-define("DefaultPassword", "Abitur17");
+define("DefaultPassword", "Abitur17");   // Voreingestelltes Passwort der Accounts
+define("WebmasterPassword", "secret");   // Passwort für den Gmail Account
 
 
 // Datenbank-Verbindung
