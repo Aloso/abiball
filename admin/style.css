@@ -26,6 +26,7 @@ html {
 body {
     margin: 0 auto;
     max-width: 1000px;
+    height: 100%;
     font-family: Roboto, sans-serif;
     background: url('../resources/background3.jpg') center;
     background-size: cover;
@@ -173,7 +174,7 @@ body {
     padding: 10px;
 }
 
-#content a.button {
+a.button {
     display: inline-block;
     text-decoration: none;
     border: 1px solid #aaaaaa;
@@ -186,17 +187,17 @@ body {
     outline-offset: -5px;
 }
 
-#content a.button:hover {
+a.button:hover {
     text-decoration: underline;
 }
 
-#content a.button.primary {
+a.button.primary {
     border: 1px solid #0063e6;
     background-color: rgb(49, 127, 255);
     color: white;
 }
 
-#content a.button.primary:hover {
+a.button.primary:hover {
     background-color: rgb(25, 106, 241);
 }
 

@@ -48,7 +48,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'nearly' &&
                             $_SESSION['passwort'] = $passwort;
                             $_SESSION['loggedin'] = 'nearly';
                             
-                            
                             require_once 'PHPMailer-master/class.phpmailer.php';
                             require_once 'PHPMailer-master/class.smtp.php';
                             require_once 'PHPMailer-master/phpmailer.lang-de.php';
