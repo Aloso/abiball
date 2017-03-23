@@ -104,5 +104,4 @@ Hinweise dazu finden Sie im Impressum.
 ## TODO
 
 * ReCaptcha verwenden
-* Passwort zurücksetzen (momentan erhält man beim Klick auf "Passwort zurücksetzen" die Information, man möge doch den Webmaster anmailen)
 * FAQ Seite (Wird erst benötigt, wenn man _Frequently Asked Questions_ hat)
