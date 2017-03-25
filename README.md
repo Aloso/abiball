@@ -76,7 +76,7 @@ Hinweise dazu finden Sie im Impressum.
 
 ## TODO
 
-*   Bestätigungs-Email beim Ändern des Passwortes
+*   Bestätigungs-Email beim Ändern der E-Mailadresse
 *   Rechnung als E-Mail zusenden lassen
 *   Nach n falschen Passworteingaben Account blockieren
 *   Sitzplatzreservierung
