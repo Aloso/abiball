@@ -111,6 +111,8 @@ if ($mysqli->connect_errno) {
     include \'error_message.inc.php\';
 }
 
+$mysqli->set_charset("utf8mb4");
+
 $meta = @$mysqli->query(\'SELECT * FROM meta\');
 $meta = @$meta->fetch_assoc();
 

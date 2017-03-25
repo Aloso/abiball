@@ -128,7 +128,7 @@ CREATE TABLE `bestellungen` (
   `bezahltAm` int(11) DEFAULT NULL,
   `preis` double NOT NULL,
   `round` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -141,7 +141,7 @@ CREATE TABLE `forum` (
   `autor` varchar(50) NOT NULL,
   `text` varchar(2000) NOT NULL,
   `datum` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -167,14 +167,14 @@ CREATE TABLE IF NOT EXISTS `meta` (
   `bic` varchar(20) NOT NULL,
   `kontonr` varchar(20) NOT NULL,
   `blz` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `meta`
 --
 
 INSERT INTO `meta` (`url`, `pageName`, `pageSubtitle`, `googleMaps`, `webmasterMail`, `webmasterAdress`, `loginTimeout`, `currentRound`, `availableCards`, `perUser`, `preis`, `zahlungsFrist`, `kontoinhaber`, `iban`, `bic`, `kontonr`, `blz`) VALUES
-(\'\', \'Abiball 2017 des LMGU\', \'18. September 2017 • Backstage München\', \'<iframe src=\"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d941.2308162181648!2d11.52165585788617!3d48.14489589252878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sde!2sde!4v1490131822677\" style=\"width:100%\" height=\"400\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>\', \'' . $email . '\', \'Max Mustermann<br>Musterstraße 14<br>12345 Mustern\', 7200, 1, 5, 1, 40, \'03.08.2017\', \'Max Mustermann\', \'DE01234567899876543210\', \'1234567890\', \'9876543210\', \'LaLaLa\');
+(\'\', \'Abiball 2017 des LMGU\', \'18. September 2017 &bull; Backstage München\', \'<iframe src=\"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d941.2308162181648!2d11.52165585788617!3d48.14489589252878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sde!2sde!4v1490131822677\" style=\"width:100%\" height=\"400\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>\', \'' . $email . '\', \'Max Mustermann<br>Musterstraße 14<br>12345 Mustern\', 7200, 1, 5, 1, 40, \'03.08.2017\', \'Max Mustermann\', \'DE01234567899876543210\', \'1234567890\', \'9876543210\', \'LaLaLa\');
 
 -- --------------------------------------------------------
 
@@ -185,7 +185,7 @@ INSERT INTO `meta` (`url`, `pageName`, `pageSubtitle`, `googleMaps`, `webmasterM
 CREATE TABLE `seitentexte` (
   `name` varchar(20) NOT NULL,
   `htmlText` varchar(20000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `seitentexte`
@@ -214,7 +214,7 @@ CREATE TABLE `user` (
   `status` varchar(15) NOT NULL DEFAULT \'inactive\' COMMENT \'inactive/incomplete/member/admin/blocked\',
   `lastActive` int(10) UNSIGNED NOT NULL DEFAULT \'0\',
   `verificationString` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 --
 -- Daten für Tabelle `user`
@@ -281,23 +281,16 @@ ALTER TABLE `user`
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 ';
         
+        
         $success = $mysqli->multi_query($query);
         if ($success) {
             do {
-                /* store first result set */
                 if ($result = $mysqli->store_result()) {
-                    while ($row = $result->fetch_row()) {
-                        printf("%s\n", $row[0]);
-                    }
                     $result->free();
                 } else {
                     echo '<p>Fehler!</p>';
                     echo $mysqli->error;
                     break;
-                }
-                /* print divider */
-                if ($mysqli->more_results()) {
-                    printf("-----------------\n");
                 }
             } while ($mysqli->next_result());
     

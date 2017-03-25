@@ -36,7 +36,10 @@ if ($mysqli->connect_errno) {
     include 'error_message.inc.php';
 }
 
-$meta = $mysqli->query('SELECT * FROM meta')->fetch_assoc();
+$mysqli->set_charset("utf8mb4");
+
+$meta = $mysqli->query('SELECT * FROM meta');
+$meta = $meta->fetch_assoc();
 
 $meta['loginTimeout'] = intval($meta['loginTimeout']);
 $meta['currentRound'] = intval($meta['currentRound']);
