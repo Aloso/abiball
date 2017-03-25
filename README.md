@@ -76,4 +76,8 @@ Hinweise dazu finden Sie im Impressum.
 
 ## TODO
 
-* FAQ Seite (Wird erst benötigt, wenn man _Frequently Asked Questions_ hat)
+*   Bestätigungs-Email beim Ändern des Passwortes
+*   Rechnung als E-Mail zusenden lassen
+*   Nach n falschen Passworteingaben Account blockieren
+*   Sitzplatzreservierung
+*   Bei unsicheren Passwörtern beschweren (momentan: Mindestlänge 8 Zeichen)
