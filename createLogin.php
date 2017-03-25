@@ -4,7 +4,9 @@ session_start();
 require_once 'resources/settings.inc.php';
 
 include '_part1a.inc.php';
-echo '<div id="content">';
+echo '
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<div id="content">';
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'nearly' &&
         isset($_SESSION['passwort']) && $_SESSION['passwort'] == DefaultPassword) {
@@ -38,6 +40,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'nearly' &&
                 case 'missingData':
                     $errorMessage = 'Bitte füllen Sie alle Felder aus!';
                     break;
+                case 'invalidReCaptcha':
+                    $errorMessage = 'Das ReCaptcha ist ungültig.';
+                    break;
             }
             
             echo '<p class="errorP"><b>Fehler:</b> ' . $errorMessage . '</p>';
@@ -58,6 +63,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'nearly' &&
             <label>
                 <span class="labelText">Passwort wiederholen:</span> <input type="password" name="passwort2">
             </label>
+            <div style="height: 10px"></div>
+            <span class="labelText"></span>
+            <div class="g-recaptcha" data-sitekey="' . ReCaptchaPublic . '" style="display:inline-block"></div>
             <div style="height: 10px"></div>
             <span class="labelText"></span> <input type="submit" value="Absenden">
             <a class="button" href="login.php">Abbrechen</a>

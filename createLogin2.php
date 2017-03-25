@@ -20,6 +20,20 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'nearly' &&
             include 'error_message.inc.php';
         }
         
+        // grab recaptcha library
+        require 'ReCaptcha/recaptchalib.php';
+        $reCaptcha = new ReCaptcha(ReCaptchaPrivate);
+        if ($_POST["g-recaptcha-response"]) {
+            $response = $reCaptcha->verifyResponse(
+                $_SERVER["REMOTE_ADDR"],
+                $_POST["g-recaptcha-response"]
+            );
+        }
+        if (!isset($response) || $response == null || !$response->success) {
+            header('Location: createLogin.php?error=invalidReCaptcha');
+            exit;
+        }
+        
         if (isset($_POST['email']) && isset($_POST['passwort']) && isset($_POST['passwort2']) &&
                 $_POST['email'] != '' && $_POST['passwort'] != '' && $_POST['passwort2'] != '') {
     
@@ -50,7 +64,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'nearly' &&
                             
                             require_once 'PHPMailer-master/class.phpmailer.php';
                             require_once 'PHPMailer-master/class.smtp.php';
-                            require_once 'PHPMailer-master/phpmailer.lang-de.php';
                             
                             $mail = new PHPMailer;
     

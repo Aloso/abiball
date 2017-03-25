@@ -58,6 +58,7 @@
     </style>
 </head>
 <body>
+Falls du hier nichts siehst, aktualisiere die Seite mit F5.
 <?php
 
 if (!isset($_GET['host']) || !isset($_GET['name']) || !isset($_GET['user']) || !isset($_GET['pass'])) {

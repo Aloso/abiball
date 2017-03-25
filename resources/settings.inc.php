@@ -1,22 +1,25 @@
-﻿<?php
+<?php
 
 /*
- * Auf dieser Website können manche Einstellungen vorgenommen werden.
  * Einstellungen sind durch Ausdrücke folgender Form definiert:
  *
  *      define("Name der Einstellung", "Wert der Einstellung");
  *
- * Du kannst die Einstellungen anpassen, indem du den WERT änderst. Der Name darf nicht
- * verändert werden!
- *
+ * Du kannst die Einstellungen anpassen, indem du den WERT änderst.
  * Alles bis auf Zahlen und Wahrheitswerte (true / false) muss in Anführungszeichen stehen.
  */
 
 
 // Voreingestelltes Passwort
 
-define("DefaultPassword", "Abitur17");   // Voreingestelltes Passwort der Accounts
-define("WebmasterPassword", "secret");   // Passwort für den Gmail Account
+define("DefaultPassword", "Abitur17");         // Voreingestelltes Passwort der Accounts
+define("WebmasterPassword", "ananasTree567");  // Passwort für den Gmail Account
+
+
+// ReCaptcha
+
+define("ReCaptchaPublic", "6LdLXhoUAAAAAFp6ciRUJ0PSmaXw0T32xM-AHsgk");
+define("ReCaptchaPrivate", "6LdLXhoUAAAAAPFnfyZv1v6YM_wLjrNSLrL_Jvzb");
 
 
 // Datenbank-Verbindung
@@ -38,12 +41,13 @@ if ($mysqli->connect_errno) {
 
 $mysqli->set_charset("utf8mb4");
 
-$meta = $mysqli->query('SELECT * FROM meta');
-$meta = $meta->fetch_assoc();
+$meta = @$mysqli->query('SELECT * FROM meta');
+$meta = @$meta->fetch_assoc();
 
 $meta['loginTimeout'] = intval($meta['loginTimeout']);
 $meta['currentRound'] = intval($meta['currentRound']);
 $meta['availableCards'] = intval($meta['availableCards']);
 $meta['perUser'] = intval($meta['perUser']);
+
 
 $loggedin = false;

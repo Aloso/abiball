@@ -76,5 +76,4 @@ Hinweise dazu finden Sie im Impressum.
 
 ## TODO
 
-* ReCaptcha verwenden
 * FAQ Seite (Wird erst benötigt, wenn man _Frequently Asked Questions_ hat)

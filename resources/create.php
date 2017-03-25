@@ -10,7 +10,7 @@
         
         body {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 0 auto 50px auto;
         }
         
         form span {
@@ -58,13 +58,18 @@
 <?php
 
 if (isset($_POST['defaultPassword']) && isset($_POST['emailPassword']) &&
+        isset($_POST['recaptcha1']) && isset($_POST['recaptcha2']) &&
         isset($_POST['host']) && isset($_POST['user']) && isset($_POST['name']) && isset($_POST['pass'])) {
     
     if ($_POST['defaultPassword'] != '' && $_POST['emailPassword'] != '' &&
+            $_POST['recaptcha1'] != '' && $_POST['recaptcha2'] != '' &&
             $_POST['host'] != '' && $_POST['user'] != '' && $_POST['name'] != '' && $_POST['pass'] != '') {
-        
+    
         $defaultPassword = $_POST['defaultPassword'];
         $emailPassword = $_POST['emailPassword'];
+    
+        $recaptcha1 = $_POST['recaptcha1'];
+        $recaptcha2 = $_POST['recaptcha2'];
         
         $host = $_POST['host'];
         $user = $_POST['user'];
@@ -92,6 +97,12 @@ if (isset($_POST['defaultPassword']) && isset($_POST['emailPassword']) &&
 
 define("DefaultPassword", "' . addslashes($defaultPassword) . '");         // Voreingestelltes Passwort der Accounts
 define("WebmasterPassword", "' . addslashes($emailPassword) . '");  // Passwort für den Gmail Account
+
+
+// ReCaptcha
+
+define("ReCaptchaPublic", "' . addslashes($recaptcha1) . '");
+define("ReCaptchaPrivate", "' . addslashes($recaptcha2) . '");
 
 
 // Datenbank-Verbindung
@@ -158,6 +169,18 @@ echo '
         <span>GMail Passwort:</span>
         <input type="text" name="emailPassword" value=""><br>
         <span></span> Passwort des GMail Accounts, von dem die E-Mails gesendet werden sollen
+    </label>
+
+    <h2>ReCaptcha</h2>
+    Gehe auf <a href="https://www.google.com/recaptcha/">diese Website</a> und <b>erstelle ein
+    ReCaptcha</b> für diese Website!<br>Gib dann Websiteschlüssel und den geheimen Schlüssel hier an:<br>
+    <label>
+        <span>Websiteschlüssel:</span>
+        <input type="text" name="recaptcha1" value="">
+    </label><br>
+    <label>
+        <span>Geheimer Schlüssel:</span>
+        <input type="text" name="recaptcha2" value="">
     </label>
 
     <h2>Verbindungseinstellungen</h2>
