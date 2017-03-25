@@ -8,45 +8,18 @@ und um auf das ewige Listenführen verzichten zu können. Matthias Kammüller ha
 Ich habe im Jahr darauf die Website verbessert und nun **fast komplett neu geschrieben**, da sich einige Fehler eingeschlichen haben und das Projekt unübersichtlich geworden ist. Ich habe nur das Design größtenteils übernommen und Teile des Scripts für die PDF-Rechnung wiederverwendet. Ich habe mich besonders bemüht, die Website flexibel zu gestalten (viele Einstellungsmöglichkeiten in der Admin-Konsole) und sie übersichtlicher zu machen.
 
 ## Voraussetzungen & Installation
-Dieses Paket benötigt einen Server mit:
--	PHP5- oder PHP7-Unterstützung 
+Dieses Paket benötigt:
+-	Einen Server mit PHP5- oder PHP7-Unterstützung 
 -	Eine leere MySQL- oder MariaDB-Datenbank
 -	Eine Domain oder Subdomain, auf der der Inhalt läuft (dies muss KEIN Root-Verzeichnis sein)
 -	Eine Domain, auf die zugegriffen werden soll
--   **Einen Gmail-Account zum senden von E-Mails**
+-   Einen Gmail-Account zum senden von E-Mails
 
 ## Installation
 1.  Hochladen der Dateien auf einen Webserver
-2.  Erstellen einer MySql- oder MariaDB-Datenbank und eines zugehörigen DB-Nutzers
-3.  Öffnen der Datei „settings.inc.php“ im Ordner „resources“. Einstellen der Passwörter an folgender Stelle:
-    
-        define("DefaultPassword", "Abitur17");   // Voreingestelltes Passwort der Accounts
-        define("WebmasterPassword", "secret");   // Passwort für den Gmail Account
-    
-    Einstellen des Datenbankzugangs an folgender Stelle:
-
-        define("DbHost",     "localhost");
-        define("DbDatabase", "abiball");
-        define("DbUsername", "php_abiball");
-        define("DbPassword", "uxvHi9FGbNXkLXd1");
-    
-4.  Ausführen der SQL-Anfrage in der .sql Datei, die sich im selben Ordner befindet
-5.  Wechseln zur Tabelle „user“ und Ändern des Vornamen, Nachnamen und der E-Mailadresse
-6.  Anmeldung auf der Website mit dem neu eingestellten Namen und dem Passwort „adminadmin“
-7.  Wechseln zum Profil und ändern des Passwortes
-8.  Wechseln in den Admin-Bereich, zu „Einstellungen“ und Anpassen der Werte
-
-    Achte darauf, dass bei „Webmaster E-Mail“ eine Gmail-Adresse steht.
-    Bei dieser müssen unter https://www.google.com/settings/security/lesssecureapps
-    **weniger sichere Apps aktiviert werden**!
-9.  Füge unter „User“ ein paar Personen zum Testen ein. Diese wirst du später wieder löschen.
-    Versuche, dich als eine der Personen anzumelden und einen Account zu erstellen.
-    Möglicherweise blockiert Google den Anmeldeversuch. Gib an, dass das du selbst warst!
-    Dann sollte beim nächsten Versuch die E-Mail zuverlässig ankommen.
-    
-    Lösche die Test-Accounts wieder.
-10. Wechsle zu „Seitentexte“ und passe die Texte nach Bedarf an.
-11. Wechsle zu „User“. Alle Abiturienten müssen manuell hinzugefügt werden.
+2.  Erstellen einer Datenbank und eines zugehörigen DB-Nutzers
+3.  Öffnen der Datei „resources/create.php“ im Browser
+4.  Folgen der Anweisungen, bis die Seite einsatzbereit ist
 
 ## Funktionen
 
