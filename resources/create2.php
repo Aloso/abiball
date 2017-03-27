@@ -108,6 +108,7 @@ DROP TABLE IF EXISTS forum;
 DROP TABLE IF EXISTS meta;
 DROP TABLE IF EXISTS seitentexte;
 DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS reservierung;
 
 
 --
@@ -218,7 +219,7 @@ CREATE TABLE `user` (
   `status` varchar(15) NOT NULL DEFAULT \'inactive\' COMMENT \'inactive/incomplete/member/admin/blocked\',
   `lastActive` int(10) UNSIGNED NOT NULL DEFAULT \'0\',
   `verificationString` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `user`
@@ -233,7 +234,7 @@ CREATE TABLE `reservierung` (
   `userID` int(11) UNSIGNED NOT NULL,
   `wunschUserID` int(11) UNSIGNED NOT NULL,
   `prioritaet` smallint(3) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indizes der exportierten Tabellen
