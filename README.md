@@ -1,6 +1,16 @@
 # Abiball-Kartenbestellungen
 Eine Website zur Kartenbestellung &amp; Organisation von Abibällen
 
+## Testumgebung
+
+Du kannst die Website hier kostenlos ausprobieren, sowohl als User, als auch als Admin: <a href="https://abiball.000webhostapp.com">abiball.000webhostapp.com</a>
+
+* Standardpasswort: Abitur17
+* User-Account: Rabe Socke, Passwort 12345678
+* Admin-Account: Meister Eder, Passwort 12345678
+
+Bitte ändere nicht diese Anmeldedaten (oder zumindest nicht dauerhaft).
+
 ## Idee und Entwicklung
 Diese Website wurde erstellt, um den Organisationsaufwand für den diesjährigen Abiball weitestgehend in Grenzen zu halten
 und um auf das ewige Listenführen verzichten zu können. Matthias Kammüller hat für diesen Zweck eine Website in PHP programmiert.
