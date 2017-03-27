@@ -11,6 +11,9 @@ Du kannst die Website hier kostenlos ausprobieren, sowohl als User, als auch als
 
 Bitte ändere nicht diese Anmeldedaten (oder zumindest nicht dauerhaft).
 
+Falls du dich nicht anmelden kannst, weil jemand die Daten verändert hat, schreib mich auf Telegram an und ich setze es zurück:
+https://t.me/joinchat/AAAAAEF9Ddvu9ancJ730zA
+
 ## Idee und Entwicklung
 Diese Website wurde erstellt, um den Organisationsaufwand für den diesjährigen Abiball weitestgehend in Grenzen zu halten
 und um auf das ewige Listenführen verzichten zu können. Matthias Kammüller hat für diesen Zweck eine Website in PHP programmiert.
