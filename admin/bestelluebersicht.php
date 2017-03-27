@@ -6,7 +6,8 @@ require_once 'verifyAdmin.php';
 
 include 'header.php';
 
-echo '<h1>Bestellübersicht</h1>
+echo '<a href="sitzplatz.php" class="button primary" target="_blank" style="float: right">Zur Sitzplatzverwaltung</a>
+<h1 style="margin-top: 0">Bestellübersicht</h1>
 
 <p>Klicke auf einen Spaltennamen, um die Tabelle danach zu sortieren.</p>
 <style>

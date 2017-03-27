@@ -5,9 +5,9 @@ require_once 'PHPMailer-master/class.smtp.php';
 
 function phpmailerSend($adress, $subject, $htmlMailBody, $mailBody = '') {
     global $meta;
-
+    
     $mail = new PHPMailer;
-
+    
     $mail->SMTPDebug = 0;                                 // debugging: 1 = errors and messages, 2 = messages only
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
@@ -16,13 +16,13 @@ function phpmailerSend($adress, $subject, $htmlMailBody, $mailBody = '') {
     $mail->Password = WebmasterPassword;                  // SMTP password
     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 465;
-
+    
     $mail->setFrom($meta['webmasterMail']);
     $mail->addAddress($adress);
     $mail->addReplyTo($meta['webmasterMail']);
-
+    
     $mail->isHTML(true);                                  // Set email format to HTML
-
+    
     $mail->Subject = utf8_decode($subject);
     $mail->Body = '<html>
 <head>
@@ -36,11 +36,11 @@ function phpmailerSend($adress, $subject, $htmlMailBody, $mailBody = '') {
     </div>
 </body>
 </html>';
-
+    
     $mail ->AltBody = $mailBody;
-
+    
     $result = $mail->send();
     if (!$result) echo $mail->ErrorInfo;
-
+    
     return $result;
 }

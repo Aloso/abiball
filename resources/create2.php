@@ -142,7 +142,7 @@ CREATE TABLE `forum` (
   `autor` varchar(50) NOT NULL,
   `text` varchar(2000) NOT NULL,
   `datum` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -167,7 +167,10 @@ CREATE TABLE IF NOT EXISTS `meta` (
   `iban` varchar(50) NOT NULL,
   `bic` varchar(20) NOT NULL,
   `kontonr` varchar(20) NOT NULL,
-  `blz` varchar(20) NOT NULL
+  `blz` varchar(20) NOT NULL,
+  `reservierungAktiviert` tinyint(1) NOT NULL DEFAULT \'0\',
+  `reservierungsPunkte` smallint(5) UNSIGNED NOT NULL DEFAULT \'6\',
+  `maxReservierungen` smallint(5) UNSIGNED NOT NULL DEFAULT \'3\'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -224,6 +227,14 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `email`, `vorname`, `nachname`, `passwortHash`, `status`, `lastActive`, `verificationString`) VALUES
 (1, \'' . $email . '\', \'' . $vorname . '\', \'' . $nachname . '\', \'$2y$10$EEv5NQb5JKP80EKmog/IYu.0TiFDhAmYmiDehJZYYzVbvE5fVbU1e\', \'admin\', 0, \'\');
 
+
+CREATE TABLE `reservierung` (
+  `rID` int(11) UNSIGNED NOT NULL,
+  `userID` int(11) UNSIGNED NOT NULL,
+  `wunschUserID` int(11) UNSIGNED NOT NULL,
+  `prioritaet` smallint(3) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+
 --
 -- Indizes der exportierten Tabellen
 --
@@ -259,6 +270,12 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indizes für die Tabelle `reservierung`
+--
+ALTER TABLE `reservierung`
+  ADD PRIMARY KEY (`rID`);
+
+--
 -- AUTO_INCREMENT für exportierte Tabellen
 --
 
@@ -277,6 +294,10 @@ ALTER TABLE `forum`
 --
 ALTER TABLE `user`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+ALTER TABLE `reservierung`
+  MODIFY `rID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

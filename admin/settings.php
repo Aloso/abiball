@@ -367,6 +367,71 @@ echo '<h2>Kartenbestellung</h2>
 </form>';
 
 
+
+
+if (isset($_POST['reservierungAktiviert'])) {
+    $reservierungAktiviert = $_POST['reservierungAktiviert'];
+    $reservierungAktiviert = $mysqli->real_escape_string($reservierungAktiviert);
+    $success = $mysqli->query("UPDATE meta SET reservierungAktiviert = '$reservierungAktiviert'");
+    
+    if ($success) {
+        $meta['reservierungAktiviert'] = $reservierungAktiviert;
+        $changed = true;
+    }
+    else echo '<p><b>Fehler beim Updaten der Aktivierung der Sitzplanfunktion!</b></p>';
+}
+
+if (isset($_POST['reservierungsPunkte'])) {
+    $reservierungsPunkte = $_POST['reservierungsPunkte'];
+    $reservierungsPunkte = $mysqli->real_escape_string($reservierungsPunkte);
+    $success = $mysqli->query("UPDATE meta SET reservierungsPunkte = '$reservierungsPunkte'");
+    
+    if ($success) {
+        $meta['reservierungsPunkte'] = $reservierungsPunkte;
+        $changed = true;
+    }
+    else echo '<p><b>Fehler beim Updaten der Punkte für Sitzplatzwünsche</b></p>';
+}
+
+if (isset($_POST['maxReservierungen'])) {
+    $maxReservierungen = $_POST['maxReservierungen'];
+    $maxReservierungen = $mysqli->real_escape_string($maxReservierungen);
+    $success = $mysqli->query("UPDATE meta SET maxReservierungen = '$maxReservierungen'");
+    
+    if ($success) {
+        $meta['maxReservierungen'] = $maxReservierungen;
+        $changed = true;
+    }
+    else echo '<p><b>Fehler beim Updaten der maximalen Anzahl der Sitzplatzwünsche</b></p>';
+}
+
+echo '<h2>Sitzplätze</h2>
+<form action="settings.php" method="post">
+    <label>
+        <span class="labelText">Freigeschaltet:</span>
+        <input type="text" name="reservierungAktiviert" value="' . $meta['reservierungAktiviert'] . '"><br>
+        <span class="labelText"></span> 1 = ja, 0 = nein
+    </label>
+    
+    <div style="height: 10px"></div>
+    <label>
+        <span class="labelText">Punkte:</span>
+        <input type="text" name="reservierungsPunkte" value="' . $meta['reservierungsPunkte'] . '"><br>
+        <span class="labelText"></span> User können diese Anzahl Punkte für Wünsche vergeben
+    </label>
+    
+    <div style="height: 10px"></div>
+    <label>
+        <span class="labelText">Wünsche möglich:</span>
+        <input type="text" name="maxReservierungen" value="' . $meta['maxReservierungen'] . '"><br>
+        <span class="labelText"></span> Je höher die Zahl, desto schwieriger wird die Einteilung!
+    </label>
+    
+    <div style="height: 10px"></div>
+    <input type="submit" value="Speichern">
+</form>';
+
+
 if ($changed) {
     
     // Alle Seitentexte müssen geupdatet werden
