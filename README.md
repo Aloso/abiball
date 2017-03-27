@@ -71,7 +71,7 @@ Die Bestellung läuft in mehreren Bestellrunden ab. Das hat den Vorteil, dass de
 Es gibt 150 Abiturienten und 700 Karten, d.h. jedem Abiturienten stehen mindestens 4 Karten zu. Es wird also eingestellt, dass in der 1. Bestellrunde jeder Nutzer bis zu 4 Karten bestellen kann. Da im Durchschnitt 3,5 Karten bestellt werden, bleiben 175 Karten übrig. Diese werden in den folgenden Runden freigegeben, wobei jeder Nutzer so viele Karten bestellen darf wie er will, bis der Vorrat aufgebraucht ist.
 
 ## Sitzplaner
-![Sitzplaner mit Drag'n'Drop](http://fs5.directupload.net/images/170327/8ji8c9ld.png)
+<img src="http://fs5.directupload.net/images/170327/8ji8c9ld.png" alt="Sitzplaner mit Drag'n'Drop" style="float:right">
 
 Eine zufriedenstellende Sitzordnung aufzustellen, kann nervenaufreibend sein und viel Papier kosten. Mit dem Sitzplaner ist es für alle Beteiligten einfacher: Jeder Abiturient kann Wünsche angeben, wer mit am Tisch sitzt und kann diese unterschiedlich gewichten. Wenn beispielsweise 3 Wünsche und 6 Punkte erlaubt sind, sind Aufteilungen wie 2/2/2, 1/2/3, 3/3 oder 6 usw. erlaubt.
 
