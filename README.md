@@ -75,7 +75,11 @@ Es gibt 150 Abiturienten und 700 Karten, d.h. jedem Abiturienten stehen mindeste
 
 Eine zufriedenstellende Sitzordnung aufzustellen, kann nervenaufreibend sein und viel Papier kosten. Mit dem Sitzplaner ist es für alle Beteiligten einfacher: Jeder Abiturient kann Wünsche angeben, wer mit am Tisch sitzt und kann diese unterschiedlich gewichten. Wenn beispielsweise 3 Wünsche und 6 Punkte erlaubt sind, sind Aufteilungen wie 2/2/2, 1/2/3, 3/3 oder 6 usw. erlaubt.
 
-Wenn alle Wünsche angekommen sind, öffnen die Administratoren den Sitzplaner unter Admin-Bereich -> Bestellungen -> Zur Sitzplatzverwaltung. Abiturienten werden durch Kreise dargestellt. In jedem Kreis steht, wie viele Karten er gekauft hat. Rote Verbindungslinien zeigen Wünsche an, die Dicke der Linien die Gewichtung. Ein Administrator kann die Kreise (Abiturienten) bequem per Drag'n'Drop neu anordnen. Außerdem kann er Tische (Rechtecke) zeichnen. Es lassen sich mehrere Kreise auswählen, um sie einfacher zu verschieben. Besonders dünne Linien lassen sich ausblenden.
+Wenn alle Wünsche angekommen sind, öffnen die Administratoren den Sitzplaner unter Admin-Bereich -> Bestellungen -> Zum Sitzplaner. Abiturienten werden durch Kreise dargestellt. In jedem Kreis steht, wie viele Karten er gekauft hat. Rote Verbindungslinien zeigen Wünsche an, die Dicke der Linien die Gewichtung. Ein Administrator kann die Kreise (Abiturienten) bequem per Drag'n'Drop neu anordnen. Außerdem kann er Tische (Rechtecke) zeichnen. Es lassen sich mehrere Kreise auswählen, um sie einfacher zu verschieben. Besonders dünne Linien lassen sich ausblenden.
+
+## Website zurücksetzen
+
+Die Website kann zurückgesetzt werden, indem die zuvor gelöschten Dateien _create.php_, _create2.php_ und _create3.php_ wieder im Ordner _resources_ eingefügt werden und die Installation erneut durchgeführt wird.
 
 ## Rechte & Werbung
 Die Website benutzt ausschließlich selber produziertes Material oder solches, dass Lizenzfrei (oder unter freien Lizenzen) zu haben ist.
