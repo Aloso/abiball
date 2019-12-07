@@ -3,7 +3,13 @@ Eine Website zur Kartenbestellung & Organisation von Abibällen
 
 ## Testumgebung
 
-Es ist im Moment keine Testumgebung eingerichtet. Falls du mehr über das Projekt wissen willst, kannst du mich direkt [auf Telegram](https://t.me/joinchat/AAAAAEF9Ddvu9ancJ730zA) anschreiben.
+Die Testumgebung ist [wieder online](http://abiball-demo.bplaced.net).
+
+ - Standardpasswort: Abitur19
+ - User-Account: Rabe Socke, Passwort 12345678
+ - Admin-Account: Meister Eder, Passwort 12345678
+
+Falls du mehr über das Projekt wissen willst, kannst du mich direkt [auf Telegram](https://t.me/joinchat/AAAAAEF9Ddvu9ancJ730zA) anschreiben.
 
 ## Idee und Entwicklung
 
