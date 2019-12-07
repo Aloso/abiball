@@ -31,5 +31,3 @@ echo '</div>';
 include '_part2.inc.php';
 
 exit;
-
-?>

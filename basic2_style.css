@@ -235,7 +235,6 @@ body {
 }
 
 #content .errorP {
-    background-color: #ffb5aa;
     background: rgba(255, 175, 169, 0.72);
     padding: 10px;
 }
@@ -280,7 +279,6 @@ body {
 
 #content fieldset {
     padding: 20px;
-    border: 1px solid gray;
     border: 1px solid rgba(0, 0, 0, 0.5);
     background-color: rgba(255, 255, 255, 0.8);
     -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -324,7 +322,7 @@ textarea.fullWidthTA {
 
 
 @media (max-width: 940px) {
-    
+
     #content {
         padding: 15px;
         width: 100%;
@@ -334,15 +332,15 @@ textarea.fullWidthTA {
         left: auto;
         margin-left: 0;
     }
-    
+
     #content fieldset {
         padding: 15px;
     }
-    
+
 }
 
 @media (max-width: 800px) {
-    
+
     #content {
         padding: 15px;
         width: 100%;
@@ -354,44 +352,44 @@ textarea.fullWidthTA {
         top: 70px;
         bottom: 41px;
     }
-    
+
     #content p {
         font-size: 110%;
     }
-    
+
     .pageText {
         font-size: 110% !important;
     }
-    
+
     #rightTop {
         padding: 7px 8px;
         font-size: 83%;
     }
-    
+
     #footer a, #rightTop a {
         margin: 0 7px;
     }
-    
+
     #footer, #rightTop a {
         font-size: 105% !important;
     }
-    
+
     #header1 {
         position: absolute;
         left: 0;
         right: 220px;
         margin: 10px;
     }
-    
+
     #header1 h1 {
         font-size: 1.35em;
         line-height: 1.15em;
     }
-    
+
     #header1 h2 {
         display: none;
     }
-    
+
     #footer {
         left: 0;
         margin-left: 0;
@@ -400,19 +398,19 @@ textarea.fullWidthTA {
         padding: 0;
         overflow: auto;
     }
-    
+
     #footer #footerInner {
         width: 550px;
         text-align: left;
         padding: 10px;
     }
-    
+
 }
 
 @media (max-width: 675px) {
-    
+
     #content .labelText {
         display: block;
     }
-    
+
 }

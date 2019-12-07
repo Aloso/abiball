@@ -59,6 +59,13 @@
         ul li, ol li {
             margin: 0.7em 0;
         }
+
+        li ul {
+            font-size: inherit;
+        }
+        li ul li {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -78,12 +85,6 @@ if (!isset($_GET['email']) || !isset($_GET['host']) || !isset($_GET['name']) || 
         echo '<p>Fehler: ' . $mysqli->connect_errno . '</p>';
         exit;
     } else {
-        if (!file_exists('settings.inc.php')) {
-            echo '<p style="color: red">Fehler: Die Einstellungsdatei konnte nicht erstellt werden. Bitte stelle sicher, dass PHP Schreibrechte hat.</p>
-            <p>Die einfachste Möglichkeit, um dies unter Linux sicherzustellen ist</p>
-            <pre>sudo chmod a+rwx -Rf --verbose .</pre>';
-            exit;
-        }
         require_once 'settings.inc.php';
     }
 }
@@ -119,15 +120,20 @@ phpmailerSend($email, 'Dies ist ein Test', '<h1 style="margin-top:0">Test</h1>' 
 echo '<h1>Nächste Schritte</h1>
 
 <ol>
-    <li><b>Anmeldung</b> als ' . $name . ' und dem Passwort "adminadmin"</li>
-    <li><b>Änderung des Passwortes</b> im Profil</li>
-    <li><b>Löschen</b> der Dateien <i>create.php</i>, <i>create2.php</i> und <i>create3.php</i> im Ordner <i>resources</i></li>
-    <li><b>Anpassen der Einstellungen</b> im Admin-Bereich</li>
-    <li><b>Hinzufügen der User</b> im Admin-Bereich</li>
-    <li><b>Anpassung der Seitentexte</b> im Admin-Bereich (zur Formatierung siehe Tipps am Seitenende)</li>
-</ol>
-
-<a class=\'button\' href=\'../index.php\' target=\'_blank\'>Zur Anmeldung</a>';
+    <li><a href="../index.php" target="_blank">Anmeldung</a><br>
+        Dein Passwort: <b>adminadmin</b></li>
+    <li><a href="../changePassword.php" target="_blank">Passwort ändern</a></li>
+    <li><b>Lösche</b> folgende Dateien im <i>resources</i> Ordner:
+        <ul>
+            <li>create.php</li>
+            <li>create2.php</li>
+            <li>create3.php</li>
+        </ul></li>
+    <li><a href="../admin/settings.php" target="_blank">Einstellungen anpassen</a></li>
+    <li><a href="../admin/useruebersicht.php" target="_blank">Die User hinzufügen</a></li>
+    <li><a href="../admin/pageTexts.php" target="_blank">Seitentexte anpassen</a><br>
+        Zur Formatierung siehe Tipps am Seitenende.</li>
+</ol>';
 
 ?>
 </body>

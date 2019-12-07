@@ -28,39 +28,39 @@ if ($meta['currentRound'] == 0) {
         Aktuelle Informationen zur Kartenbestellung finden Sie auf der Startseite.
     </p>';
 } else {
-    
+
     if ($meta['perUser'] == 1) {
         echo '<p>
             Momentan läuft die ' . $meta['currentRound'] . '. Bestellrunde. Hierbei darf jeder
             Nutzer bis zu ' . $meta['availableCards'] . ' Karten bestellen.
         </p>';
-    
+
         $orderedInThisRound = $mysqli->query("SELECT COUNT(*) FROM bestellungen
                 WHERE round = $meta[currentRound] AND userID = $userID");
         $anz = $meta['availableCards'] - $orderedInThisRound->fetch_assoc()['COUNT(*)'];
-        
+
         if ($anz > 0) {
-            
+
             echo '<p>Sie dürfen in dieser Bestellrunde noch <b>' . $anz . ' Karten</b> bestellen.</p>';
-    
+
             $data = $mysqli->query("SELECT * FROM seitentexte WHERE name = 'Bestellung'");
             if (($row = $data->fetch_assoc()) != null) {
                 echo '<div class="pageText">' . $row['htmlText'] . '</div>';
             }
-    
+
             echo '<form action="bestellung2.php">
                 <input type="submit" value="Akzeptieren und fortfahren">
             </form><br><br>';
-            
+
         } else {
             echo '<p>Sie dürfen in dieser Bestellrunde keine Karten mehr bestellen.</p>';
         }
-        
+
     } else {
         $orderedInThisRound = $mysqli->query("SELECT COUNT(*) FROM bestellungen
                 WHERE round = $meta[currentRound]");
         $anz = $meta['availableCards'] - $orderedInThisRound->fetch_assoc()['COUNT(*)'];
-        
+
         if ($anz > 0) {
             echo '<p>
                 Momentan läuft die ' . $meta['currentRound'] . '. Bestellrunde. Hierbei dürfen
@@ -68,16 +68,16 @@ if ($meta['currentRound'] == 0) {
             </p><p>
                 Es sind noch <b>' . $anz . ' Karten</b> übrig.
             </p>';
-    
+
             $data = $mysqli->query("SELECT * FROM seitentexte WHERE name = 'Bestellung'");
             if (($row = $data->fetch_assoc()) != null) {
                 echo '<div class="pageText">' . $row['htmlText'] . '</div>';
             }
-            
+
             echo '<form action="bestellung2.php">
                 <input type="submit" value="Akzeptieren und fortfahren">
             </form><br><br>';
-            
+
         } else {
             echo '<p>
                 Momentan läuft die ' . $meta['currentRound'] . '. Bestellrunde.
@@ -89,7 +89,7 @@ if ($meta['currentRound'] == 0) {
             </p>';
         }
     }
-    
+
 }
 
 echo '</div>';

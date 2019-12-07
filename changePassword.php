@@ -14,18 +14,18 @@ if (isset($_POST['oldPassword']) && isset($_POST['password']) && isset($_POST['c
     $oldPassword = $_POST['oldPassword'];
     $password = $_POST['password'];
     $confirm = $_POST['confirm'];
-    
+
     $data = $mysqli->query("SELECT * FROM user WHERE id = $userID");
     if (($row = $data->fetch_assoc()) != null) {
-        $hash = $row['passwortHash'];
+        $hash = $row['passwordHash'];
         if (password_verify($oldPassword, $hash)) {
             if (strlen($password) > 7) {
                 if ($password == $confirm) {
                     echo '<p>Das Passwort wurde aktualisiert.</p>';
-            
+
                     $encPassword = $mysqli->real_escape_string(password_hash($password, PASSWORD_BCRYPT));
-            
-                    $success = $mysqli->query("UPDATE user SET passwortHash = '$encPassword' WHERE id = $userID");
+
+                    $success = $mysqli->query("UPDATE user SET passwordHash = '$encPassword' WHERE id = $userID");
                     if (!$success) {
                         echo '<p class="errorP"><b>Fehler:</b> Bitte versuchen Sie es erneut.</p>';
                     } else {

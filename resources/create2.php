@@ -7,17 +7,17 @@
         * {
             font-family: "Open Sans", sans-serif;
         }
-        
+
         body {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         form span {
             display: inline-block;
             width: 220px;
         }
-        
+
         input[type=text] {
             border: 1px solid #aaaaaa;
             border-radius: 3px;
@@ -26,11 +26,11 @@
             width: 300px;
             margin: 8px 0 0 0;
         }
-        
+
         input[type=text]:hover, input[type=text]:focus {
             border: 1px solid #006bc7;
         }
-        
+
         input[type=submit] {
             border: 1px solid #bbbbbb;
             border-radius: 3px;
@@ -40,13 +40,13 @@
             background-color: #eeeeee;
             margin: 8px 0 0 0;
         }
-        
+
         input[type=submit]:hover {
             color: black;
             border: 1px solid #aaaaaa;
             background-color: #e1e1e1;
         }
-        
+
         input[type=submit]:active {
             color: white;
             border: 1px solid #005bcb;
@@ -76,13 +76,13 @@ if (!isset($_GET['host']) || !isset($_GET['name']) || !isset($_GET['user']) || !
 }
 
 if (isset($_POST['email']) && isset($_POST['vorname']) && isset($_POST['nachname'])) {
-    
+
     if ($_POST['email'] != '' && $_POST['vorname'] != '' && $_POST['nachname'] != '') {
-    
+
         $email = $_POST['email'];
         $vorname = $_POST['vorname'];
         $nachname = $_POST['nachname'];
-        
+
         $query = /** @lang MySQL */ '-- phpMyAdmin SQL Dump
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
@@ -214,17 +214,17 @@ CREATE TABLE `user` (
   `email` varchar(50) DEFAULT NULL,
   `vorname` varchar(30) NOT NULL,
   `nachname` varchar(30) NOT NULL,
-  `passwortHash` varchar(200) CHARACTER SET ascii NOT NULL,
+  `passwordHash` varchar(200) CHARACTER SET ascii NOT NULL,
   `status` varchar(15) NOT NULL DEFAULT \'inactive\' COMMENT \'inactive/incomplete/member/admin/blocked\',
   `lastActive` int(10) UNSIGNED NOT NULL DEFAULT \'0\',
-  `verificationString` varchar(40) NOT NULL
+  `verificationString` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `vorname`, `nachname`, `passwortHash`, `status`, `lastActive`, `verificationString`) VALUES
+INSERT INTO `user` (`id`, `email`, `vorname`, `nachname`, `passwordHash`, `status`, `lastActive`, `verificationString`) VALUES
 (1, \'' . $email . '\', \'' . $vorname . '\', \'' . $nachname . '\', \'$2y$10$EEv5NQb5JKP80EKmog/IYu.0TiFDhAmYmiDehJZYYzVbvE5fVbU1e\', \'admin\', 0, \'\');
 
 
@@ -302,8 +302,8 @@ ALTER TABLE `reservierung`
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 ';
-        
-        
+
+
         $success = $mysqli->multi_query($query);
         if ($success) {
             do {
@@ -315,23 +315,23 @@ ALTER TABLE `reservierung`
                     break;
                 }
             } while ($mysqli->next_result());
-    
+
             $email = urlencode($email);
             $host = urlencode($host);
             $name = urlencode($name);
             $user = urlencode($user);
             $pass = urlencode($pass);
-            
+
             header("Location: create3.php?email=$email&host=$host&name=$name&user=$user&pass=$pass");
             exit;
         } else {
             echo '<p style="color: red">Fehler!</p>';
         }
-        
+
     } else {
         echo '<p>Bitte alle Felder ausfüllen!</p>';
     }
-    
+
 }
 
 if (!file_exists('settings.inc.php')) {
@@ -362,12 +362,12 @@ echo '<h1>Admin-Account</h1>
         <span>Nachname:</span>
         <input type="text" name="nachname" value="">
     </label><br>
-    
+
     <p>
         Bevor du auf "Account erstellen" klickst, <b>aktiviere weniger sicher Apps</b>:
         <a href="https://www.google.com/settings/security/lesssecureapps" target="_blank">https://www.google.com/settings/security/lesssecureapps</a>
     </p>
-    
+
     <input type="submit" value="Account erstellen">
 </form>';
 

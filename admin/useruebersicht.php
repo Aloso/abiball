@@ -10,12 +10,12 @@ if (isset($_POST['text'])) {
     $text = $_POST['text'];
     $text = str_replace("\r", '', $text);
     $array = explode("\n", $text);
-    
+
     $len = count($array);
     for ($i = 0; $i < $len; $i++) {
         $x = $array[$i];
         if (strlen($x) == 0) continue;
-        
+
         $names = explode(' ', $x);
         $namesLen = count($names);
         $vorname = '';
@@ -34,8 +34,8 @@ if (isset($_POST['text'])) {
         if ($vorname != '' && $nachname != '') {
             $vorname = $mysqli->real_escape_string($vorname);
             $nachname = $mysqli->real_escape_string($nachname);
-            
-            $success = $mysqli->query("INSERT INTO user (email, vorname, nachname, passwortHash)
+
+            $success = $mysqli->query("INSERT INTO user (email, vorname, nachname, passwordHash)
                     VALUES('', '$vorname', '$nachname', '')");
             if ($success) {
                 echo 'User "' . $vorname . ' ' . $nachname . '" eingefügt.<br>';
@@ -47,7 +47,7 @@ if (isset($_POST['text'])) {
             echo '<b>Fehler</b> beim Einfügen von "' . $x . '" (Falsches Format)';
         }
     }
-    
+
     echo '<script type="text/javascript">
         setTimeout(function() {
             window.location.href = window.location.href;
@@ -106,7 +106,7 @@ $allUser = $mysqli->query('SELECT * FROM user ' . $sort);
 
 while (($row = $allUser->fetch_assoc()) != null) {
     $lastActive = date('d.m.Y - H:i', $row['lastActive']);
-    
+
     echo "<tr>
         <td>$row[id]</td>
         <td>$row[vorname]</td>

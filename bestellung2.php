@@ -25,7 +25,7 @@ if (isset($_GET['error'])) {
             $error = 'Die Bestellung ist fehlgeschlagen! Es liegt ein Problem in der Datenbank vor.
                     Bitte informieren Sie darüber den Webmaster: ' . $meta['webmasterMail'];
             break;
-    
+
         case 'emptyString':
             $error = 'Die Bestellung ist fehlgeschlagen! Es muss ein Name eingegeben werden.';
             break;
@@ -36,7 +36,7 @@ if (isset($_GET['error'])) {
             $error = 'Die Bestellung ist fehlgeschlagen! Der angegebene Name ist zu lang
                     (länger als 50 Zeichen).';
             break;
-            
+
         case 'noCardsAvailablePerUser':
             $error = 'Die Bestellung ist fehlgeschlagen! Es sind keine Karten mehr verfügbar.';
             break;
@@ -47,7 +47,7 @@ if (isset($_GET['error'])) {
         default:
             $error = 'Die Bestellung ist fehlgeschlagen!';
     }
-    
+
     echo '<div class="error message"><b>Fehler:</b> ' . $error . '</div>';
 }
 
@@ -72,22 +72,22 @@ if ($meta['currentRound'] == 0) {
         Aktuelle Informationen zur Kartenbestellung finden Sie auf der Startseite.
     </p>';
 } else {
-    
-    
+
+
     if ($meta['perUser'] == 1) {
         $orderedInThisRound = $mysqli->query("SELECT COUNT(*) FROM bestellungen
                 WHERE round = $meta[currentRound] AND userID = $userID");
         $orderedInThisRound = $orderedInThisRound->fetch_assoc()['COUNT(*)'];
         $anz = $meta['availableCards'] - $orderedInThisRound;
-        
+
         if ($anz > 0) {
-            
+
             $orderedTotal = $mysqli->query("SELECT COUNT(*) FROM bestellungen WHERE userID = $userID");
             $orderedTotal = $orderedTotal->fetch_assoc()['COUNT(*)'];
-            
+
             if ($orderedTotal == '0') {
                 $fullName = $vorname . ' ' . $nachname;
-                
+
                 $inputField = '<input type="text" value="' . $fullName . '" disabled
                 style="cursor: not-allowed"
                 title="Sie müssen zuerst eine Karte für sich selbst bestellen.">
@@ -95,9 +95,9 @@ if ($meta['currentRound'] == 0) {
             } else {
                 $inputField = '<input type="text" name="name" value="">';
             }
-            
+
             echo '<p>Sie dürfen in dieser Bestellrunde noch <b>' . $anz . ' Karten</b> bestellen.</p>
-            
+
             <form action="bestellung3.php" method="post">
                 <fieldset>
                     <p>Wer soll diese Karte erhalten?</p>
@@ -112,25 +112,25 @@ if ($meta['currentRound'] == 0) {
                     Warnung: Dies kann nicht rückgängig gemacht werden.
                 </fieldset>
             </form><br><br>';
-            
+
         } else {
             echo '<p>Sie dürfen in dieser Bestellrunde keine Karten mehr bestellen.</p>';
         }
-        
+
     } else {
         $orderedInThisRound = $mysqli->query("SELECT COUNT(*) FROM bestellungen
                 WHERE round = $meta[currentRound]");
         $orderedInThisRound = $orderedInThisRound->fetch_assoc()['COUNT(*)'];
         $anz = $meta['availableCards'] - $orderedInThisRound;
-    
+
         if ($anz > 0) {
-    
+
             $orderedTotal = $mysqli->query("SELECT COUNT(*) FROM bestellungen WHERE userID = $userID");
             $orderedTotal = $orderedTotal->fetch_assoc()['COUNT(*)'];
-    
+
             if ($orderedTotal == '0') {
                 $fullName = $vorname . ' ' . $nachname;
-        
+
                 $inputField = '<input type="text" value="' . $fullName . '" disabled
                 style="cursor: not-allowed"
                 title="Sie müssen zuerst eine Karte für sich selbst bestellen.">
@@ -138,9 +138,9 @@ if ($meta['currentRound'] == 0) {
             } else {
                 $inputField = '<input type="text" name="name" value="">';
             }
-        
+
             echo '<p>In dieser Bestellrunde sind noch <b>' . $anz . ' Karten</b> verfügbar.</p>
-            
+
             <form action="bestellung3.php" method="post">
                 <fieldset>
                     <p>Wer soll diese Karte erhalten?</p>
@@ -155,12 +155,12 @@ if ($meta['currentRound'] == 0) {
                     Warnung: Dies kann nicht rückgängig gemacht werden.
                 </fieldset>
             </form><br><br>';
-        
+
         } else {
             echo '<p>Sie dürfen in dieser Bestellrunde keine Karten mehr bestellen.</p>';
         }
     }
-    
+
 }
 
 echo '</div>';

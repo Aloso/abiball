@@ -7,18 +7,18 @@ include "_part1.inc.php";
 
 
 if (isset($_POST['email']) && isset($_POST['vorname']) && isset($_POST['nachname'])) {
-    
+
     $email = $_POST['email'];
     $vorname = $_POST['vorname'];
     $nachname = $_POST['nachname'];
-    
+
     $encVorname = $mysqli->real_escape_string($vorname);
     $encNachname = $mysqli->real_escape_string($nachname);
-    
+
     $userRes = $mysqli->query("SELECT * FROM user WHERE nachname = '$encNachname' AND vorname = '$encVorname'");
-    
+
     if (($row = $userRes->fetch_assoc()) != null) {
-    
+
         if ($row['status'] == 'blocked') {
             header('Location: login.php?error=blocked');
             exit;
@@ -27,32 +27,32 @@ if (isset($_POST['email']) && isset($_POST['vorname']) && isset($_POST['nachname
             header('Location: login.php?error=notAuthorizedToReset');
             exit;
         }
-        
+
         if ($row['email'] == $email) {
-    
+
             $vString = time() . mt_rand(1000, 10000);
             $encVString = $mysqli->real_escape_string($vString);
             $encUserID = $mysqli->real_escape_string($row['id']);
-            
+
             $success = $mysqli->query("UPDATE user
-                    SET passwortHash = '', verificationString = '$encVString'
+                    SET passwordHash = '', verificationString = '$encVString'
                     WHERE vorname = '$encVorname' AND nachname = '$encNachname'");
             if (!$success) {
                 header('Location: login.php?message=resetEmailFailed');
                 exit;
             }
-            
+
             include 'mailtemplate.inc.php';
-            
+
             $subject = 'Zurücksetzen Ihres Passwortes';
             $vLink = $meta['url'] . 'resetPassword.php?id=' . $encUserID . '&verificationString=' . urlencode($vString);
-            
+
             $text = 'Zurücksetzen Ihres Passwortes
 
 Klicken Sie auf folgenden Link, um Ihr Passwort zurückzusetzen: ' . $vLink .'
 
 Danach können Sie sich mit dem voreingestellten Passwort anmelden.';
-            
+
             $htmlText = '<h1 style="margin-top: 0; font-size: 30px">Zurücksetzen Ihres Passwortes</h1>
 
 Um Ihr Passwort zurückzusetzen, klicken Sie auf folgenden Link:<br><br><br>
@@ -62,22 +62,22 @@ Um Ihr Passwort zurückzusetzen, klicken Sie auf folgenden Link:<br><br><br>
 <hr style="border-top:none; border-left:none; border-right:none; border-bottom: 1px solid #aaaaaa;">
 ' . date('d.m.Y H:i') . '<br>
 ' . $meta['pageName'];
-            
+
             if (!phpmailerSend($email, $subject, $htmlText, $text)) {
                 header('Location: login.php?message=resetEmailFailed');
                 exit;
             }
-            
+
         }
-        
+
         header('Location: login.php?message=resetEmailSent');
         exit;
-        
+
     } else {
         $error = 'Der User existiert nicht.';
         include 'error_message.inc.php';
     }
-    
+
 }
 
 ?>
@@ -106,7 +106,7 @@ Um Ihr Passwort zurückzusetzen, klicken Sie auf folgenden Link:<br><br><br>
         background-color: rgb(49, 127, 255);
         color: white;
     }
-    
+
     @media (max-width: 400px) {
         .labelText {
             display: block;

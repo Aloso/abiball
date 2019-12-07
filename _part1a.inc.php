@@ -23,9 +23,9 @@ if (isset($status)) {
     echo '<div id="rightTop">
         Eingeloggt als <b>' . $vorname . ' ' . $nachname . '</b>
         <div style="height: 10px"></div>';
-    
+
     if ($status == 'admin') echo '<a href="admin">Admin-Bereich</a>';
-    
+
     echo '<a href="profil.php">Profil</a>
         <a href="logout.php">Logout</a>
     </div>';

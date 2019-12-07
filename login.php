@@ -2,7 +2,7 @@
 
 session_start();
 include "resources/settings.inc.php";
-if (!defined(DbDatabase)) {
+if (!isset($mysqli)) {
     $error = 'Nicht initialisiert';
     include 'error_message.inc.php';
 }
@@ -35,9 +35,9 @@ if (isset($_GET['error'])) {
             break;
     }
     echo '<div class="message error">' . $errorMessage . '</div>';
-    
+
 } else if (isset($_GET['message'])) {
-    
+
     $message = $_GET['message'];
     switch ($message) {
         case 'sessionExpired':
@@ -48,7 +48,7 @@ if (isset($_GET['error'])) {
             break;
     }
     echo '<div class="message">' . $message . '</div>';
-    
+
 } else if (isset($loggedout)) {
     echo '<div class="message">Sie wurden ausgeloggt.</div>';
 }

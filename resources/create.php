@@ -7,17 +7,17 @@
         * {
             font-family: "Open Sans", sans-serif;
         }
-        
+
         body {
             max-width: 1200px;
             margin: 0 auto 50px auto;
         }
-        
+
         form span {
             display: inline-block;
             width: 220px;
         }
-        
+
         input[type=text] {
             border: 1px solid #aaaaaa;
             border-radius: 3px;
@@ -26,11 +26,11 @@
             width: 300px;
             margin: 8px 0 0 0;
         }
-        
+
         input[type=text]:hover, input[type=text]:focus {
             border: 1px solid #006bc7;
         }
-        
+
         input[type=submit] {
             border: 1px solid #bbbbbb;
             border-radius: 3px;
@@ -40,13 +40,13 @@
             background-color: #eeeeee;
             margin: 8px 0 0 0;
         }
-        
+
         input[type=submit]:hover {
             color: black;
             border: 1px solid #aaaaaa;
             background-color: #e1e1e1;
         }
-        
+
         input[type=submit]:active {
             color: white;
             border: 1px solid #005bcb;
@@ -60,28 +60,29 @@
 if (isset($_POST['defaultPassword']) && isset($_POST['emailPassword']) &&
         isset($_POST['recaptcha1']) && isset($_POST['recaptcha2']) &&
         isset($_POST['host']) && isset($_POST['user']) && isset($_POST['name']) && isset($_POST['pass'])) {
-    
+
     if ($_POST['defaultPassword'] != '' && $_POST['emailPassword'] != '' &&
             $_POST['recaptcha1'] != '' && $_POST['recaptcha2'] != '' &&
             $_POST['host'] != '' && $_POST['user'] != '' && $_POST['name'] != '' && $_POST['pass'] != '') {
-    
+
         $defaultPassword = $_POST['defaultPassword'];
         $emailPassword = $_POST['emailPassword'];
-    
+
         $recaptcha1 = $_POST['recaptcha1'];
         $recaptcha2 = $_POST['recaptcha2'];
-        
+
         $host = $_POST['host'];
         $user = $_POST['user'];
         $name = $_POST['name'];
         $pass = $_POST['pass'];
-        
+
         $mysqli = @new mysqli($host, $user, $pass, $name);
         if ($mysqli->connect_errno) {
             echo '<div style="margin: 1em 0; font-size:120%">Verbindung fehlgeschlagen:<br>' . $mysqli->connect_errno . '</div>';
         } else {
-            
-            $fileStr = '<?php
+
+            $fileStr = /** @lang InjectablePHP */
+                '<?php
 
 /*
  * Einstellungen sind durch Ausdrücke folgender Form definiert:
@@ -138,19 +139,19 @@ $loggedin = false;
             $handle = fopen('settings.inc.php', 'w');
             fwrite($handle, $fileStr);
             fclose($handle);
-    
+
             $host = urlencode($host);
             $name = urlencode($name);
             $user = urlencode($user);
             $pass = urlencode($pass);
-            
+
             header("Location: create2.php?host=$host&name=$name&user=$user&pass=$pass");
         }
-        
+
     } else {
         echo '<div style="margin: 1em 0; font-size:120%">Bitte alle Felder ausfüllen!</div>';
     }
-    
+
 }
 
 $ignoreFailedDbConnection = true;
@@ -172,15 +173,15 @@ echo '
     </label>
 
     <h2>ReCaptcha</h2>
-    Gehe auf <a href="https://www.google.com/recaptcha/">diese Website</a> und <b>erstelle ein
-    ReCaptcha</b> für diese Website!<br>Gib dann Websiteschlüssel und den geheimen Schlüssel hier an:<br>
+    Gehe auf <b><a href="https://www.google.com/recaptcha/">diese Website</a></b> und erstelle ein <b>reCAPTCHA, Version 2</b>.<br>
+    Gib dann die reCAPTCHA-Schlüssel hier an:<br>
     <label>
         <span>Websiteschlüssel:</span>
-        <input type="text" name="recaptcha1" value="">
+        <input type="text" name="recaptcha1" value="" placeholder="z.B. 6LfqlcYUAAAAAP1Gg1yvlCyQq0etZ66hQReVeBY_">
     </label><br>
     <label>
         <span>Geheimer Schlüssel:</span>
-        <input type="text" name="recaptcha2" value="">
+        <input type="text" name="recaptcha2" value="" placeholder="z.B 6LfqlcYUAAAAACK_xWJTdcj5nh6XVFdCTG93Y0Dq">
     </label>
 
     <h2>Verbindungseinstellungen</h2>
