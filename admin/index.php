@@ -40,14 +40,14 @@ if ($lastActiveUser->num_rows != 0) {
     echo '<p>In der letzten Stunde waren folgende Nutzer aktiv:</p>
     <table>
         <tr><th>ID</th><th>E-Mail</th><th>Name</th><th>Status</th><th>Zuletzt aktiv um</th></tr>';
-    
+
     while (($row = $lastActiveUser->fetch_assoc()) != null) {
         $date = date('H:i', $row['lastActive']);
         echo "<tr><td>$row[id]</td><td>$row[email]</td><td><a href='user.php?id=$row[id]'>$row[vorname] $row[nachname]</a></td><td>$row[status]</td><td>$date</td></tr>";
     }
-    
+
     echo '</table>';
-    
+
 } else {
     echo '<p>In der letzten Stunde waren keine Nutzer aktiv.</p>';
 }

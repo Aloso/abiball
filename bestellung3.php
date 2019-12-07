@@ -32,20 +32,20 @@ if ($meta['currentRound'] == 0) {
     header('Location: bestellung2.php?error=orderingDisabled');
     exit;
 } else {
-    
-    
+
+
     if ($meta['perUser'] == 1) {
-        
+
         $orderedInThisRound = $mysqli->query("SELECT COUNT(*) FROM bestellungen
                 WHERE round = $meta[currentRound] AND userID = $userID");
         $orderedInThisRound = $orderedInThisRound->fetch_assoc()['COUNT(*)'];
         $anz = $meta['availableCards'] - $orderedInThisRound;
-        
+
         if ($anz > 0) {
-            
+
             $success = $mysqli->query("INSERT INTO bestellungen (userID, name, bestelltAm, bezahltAm, preis, round)
                     VALUES ($userID, '$encName', $now, null, $preis, $round)");
-            
+
             if ($success) {
                 header('Location: bestellung2.php?ordered=' . urlencode($name));
                 exit;
@@ -53,24 +53,24 @@ if ($meta['currentRound'] == 0) {
                 header('Location: bestellung2.php?error=databaseError');
                 exit;
             }
-            
+
         } else {
             header('Location: bestellung2.php?error=noCardsAvailablePerUser');
             exit;
         }
-        
+
     } else {
-        
+
         $orderedInThisRound = $mysqli->query("SELECT COUNT(*) FROM bestellungen
                 WHERE round = $meta[currentRound]");
         $orderedInThisRound = $orderedInThisRound->fetch_assoc()['COUNT(*)'];
         $anz = $meta['availableCards'] - $orderedInThisRound;
-        
+
         if ($anz > 0) {
-        
+
             $success = $mysqli->query("INSERT INTO bestellungen (userID, name, bestelltAm, bezahltAm, preis, round)
                     VALUES ($userID, '$encName', $now, null, $preis, $round)");
-            
+
             if ($success) {
                 header('Location: bestellung2.php?ordered=' . urlencode($name));
                 exit;
@@ -78,12 +78,12 @@ if ($meta['currentRound'] == 0) {
                 header('Location: bestellung2.php?error=databaseError');
                 exit;
             }
-        
+
         } else {
             header('Location: bestellung2.php?error=noCardsAvailablePerAll');
             exit;
         }
-        
+
     }
-    
+
 }

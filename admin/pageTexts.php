@@ -16,7 +16,7 @@ echo '<h1>Seitentexte</h1>
         vertical-align:top;
         width: calc(100% - 210px);
     }
-    
+
     @media (max-width: 647px) {
         .pageTextTA {
             width: 100%;
@@ -26,16 +26,16 @@ echo '<h1>Seitentexte</h1>
 
 if (isset($_POST['name']) && isset($_POST['htmlText'])) {
     $name = $_POST['name'];
-    
+
     // Die Funktion markupToHtml ist selbstgeschrieben (siehe markup.php)
-    
+
     $text = markupToHtml($_POST['htmlText']);
-    
+
     // Für Datenbank vorbereiten:
-    
+
     $encName = $mysqli->real_escape_string($name);
     $encText = $mysqli->real_escape_string($text);
-            
+
     $success = $mysqli->query("UPDATE seitentexte SET htmlText = '$encText' WHERE name = '$encName'");
     if ($success) {
         echo '<div class="success message">Seitentext angepasst!</div>
@@ -52,9 +52,9 @@ $pageTexts = $mysqli->query("SELECT * FROM seitentexte");
 
 while (($row = $pageTexts->fetch_assoc()) != null) {
     // Die Funktion markupToHtml ist selbstgeschrieben (siehe markup.php)
-    
+
     $text = htmlToMarkup($row['htmlText']);
-    
+
     echo '<form action="pageTexts.php" method="post">
         <label>
             <span class="labelText">' . $row['name'] . '</span>

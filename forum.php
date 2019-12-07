@@ -65,7 +65,7 @@ if (isset($_GET['error'])) {
             $error = 'Der Post konnte nicht gespeichert werden. Es liegt ein Problem in der
                     Datenbank vor. Bitte informieren Sie darüber den Webmaster: ' . $meta['webmasterMail'];
             break;
-        
+
         case 'emptyString':
             $error = 'Der Post konnte nicht gespeichert werden. Es muss ein Text eingegeben werden.';
             break;
@@ -76,11 +76,11 @@ if (isset($_GET['error'])) {
             $error = 'Der Post konnte nicht gespeichert werden. Der angegebene Text ist zu lang
                     (länger als 2000 Zeichen).';
             break;
-            
+
         default:
             $error = 'Der Post konnte nicht gespeichert werden.';
     }
-    
+
     echo '<div class="error message"><b>Fehler:</b> ' . $error . '</div>';
 }
 
@@ -108,14 +108,14 @@ $limit2 = $limit1 + $entriesPerPage;
 $posts = $mysqli->query("SELECT * FROM forum ORDER BY datum DESC LIMIT $limit1, $entriesPerPage");
 while (($row = $posts->fetch_assoc()) != null) {
     $datum = date("d. m. Y  H:i", $row['datum']);
-    
+
     if ($row['autor'] == $me || $status == 'admin') {
         $deleteLink = '<a href="forum.php?page=' . $page . '&delete=' . $row['id'] .
                 '" style="margin-left:20px">Löschen</a>';
     } else {
         $deleteLink = '';
     }
-    
+
     echo '<div style="height:15px"></div>
             <span class="postAuthor">' . $row['autor'] . '</span>
             <span class="postDate">' . $datum . $deleteLink . '</span>

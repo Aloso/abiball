@@ -31,10 +31,10 @@ if ($data->num_rows == 0) {
 } else {
     echo '<table>
     <tr><th>Name</th><th>Preis</th><th>Bestellt am</th><th>Bezahlt</th><th></th></tr>';
-    
+
     while (($row = $data->fetch_assoc()) != null) {
         $bestelltAm = date("d. m. Y  H:m", $row['bestelltAm']);
-    
+
         echo '<tr>
             <td>' . $row['name'] . '</td>
             <td>' . $row['preis'] . ' Euro</td>
@@ -48,10 +48,10 @@ if ($data->num_rows == 0) {
             </td>
         </tr>';
     }
-    
+
     echo '</table><br><br>
     <a href="rechnung.php" class="button primary" target="_blank">Rechnung als PDF-Dokument speichern</a><br><br>';
-    
+
 }
 
 echo '</div>';

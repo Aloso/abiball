@@ -15,14 +15,14 @@ if (isset($_POST['email'])) {
         <p><b>Achtung:</b> Bitte vergewissern Sie sich, dass Sie über diese Adresse E-Mails
         empfangen können. Andernfalls können Sie nicht über wichtige Details zu Ihren Bestellungen
         informiert werden.</p>';
-        
+
         $encEmail = $mysqli->real_escape_string($email);
-        
+
         $success = $mysqli->query("UPDATE user SET email = '$encEmail' WHERE id = $userID");
         if (!$success) {
             echo '<p>Beim Speichern ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.</p>';
         }
-        
+
     } else {
         echo '<p class="errorP"><b>Fehler:</b> Die angegebene Adresse ist ungültig.</p>';
     }
