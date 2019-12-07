@@ -99,6 +99,7 @@ if (isset($_POST['defaultPassword']) && isset($_POST['emailPassword']) &&
 
 define("DefaultPassword", "' . addslashes($defaultPassword) . '");         // Voreingestelltes Passwort der Accounts
 define("WebmasterPassword", "' . addslashes($emailPassword) . '");  // Passwort für den Gmail Account
+define("useSmtp", true);
 
 
 // ReCaptcha

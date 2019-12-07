@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+
+$htmlTop = '<!DOCTYPE html>
 <html lang="de">
 <head>
     <title>Seitenerstellung</title>
@@ -57,8 +59,7 @@
         }
     </style>
 </head>
-<body>
-<?php
+<body>';
 
 if (!isset($_GET['host']) || !isset($_GET['name']) || !isset($_GET['user']) || !isset($_GET['pass'])) {
     header('Location: create.php');
@@ -309,10 +310,11 @@ ALTER TABLE `reservierung`
             do {
                 if ($result = $mysqli->store_result()) {
                     $result->free();
-                } else {
+                } else if ($mysqli->errno != 0) {
+                    echo $htmlTop;
                     echo '<p style="color: red">Fehler!</p>';
                     echo $mysqli->error;
-                    break;
+                    exit;
                 }
             } while ($mysqli->next_result());
 
@@ -325,13 +327,15 @@ ALTER TABLE `reservierung`
             header("Location: create3.php?email=$email&host=$host&name=$name&user=$user&pass=$pass");
             exit;
         } else {
+            echo $htmlTop;
             echo '<p style="color: red">Fehler!</p>';
         }
-
     } else {
+        echo $htmlTop;
         echo '<p>Bitte alle Felder ausfüllen!</p>';
     }
-
+} else {
+    echo $htmlTop;
 }
 
 if (!file_exists('settings.inc.php')) {
@@ -350,9 +354,9 @@ echo '<h1>Admin-Account</h1>
 
 <form action="create2.php' . "?host=$host&name=$name&user=$user&pass=$pass" . '" method="post">
     <label>
-        <span>GMail-Adresse:</span>
+        <span>E-Mailadresse:</span>
         <input type="text" name="email" value=""><br>
-        <span></span> Wenn dies keine GMail Adresse ist, kann der Server keine SMTP-Verbindung herstellen!
+        <span></span>Falls du SMTP verwenden willst, muss dies eine GMail-Adresse sein.
     </label><br>
     <label>
         <span>Vorname:</span>
@@ -361,11 +365,17 @@ echo '<h1>Admin-Account</h1>
     <label>
         <span>Nachname:</span>
         <input type="text" name="nachname" value="">
-    </label><br>
+    </label>
 
     <p>
-        Bevor du auf "Account erstellen" klickst, <b>aktiviere weniger sicher Apps</b>:
-        <a href="https://www.google.com/settings/security/lesssecureapps" target="_blank">https://www.google.com/settings/security/lesssecureapps</a>
+        Warnung: Manche Anbieter (z.B. bplaced, GoDaddy) blockieren SMTP-Verbindungen.
+        Wähle in diesem Fall eine E-Mailadresse auf der Domain des Webservers (z.B. webmaster@deine.domain.de)
+        und ändere danach in der Datei <i>resources/settings.inc.php</i> den Wert "useSmtp" zu <i>false</i>.
+    </p>
+    <p>
+        Falls du eine GMail-Adresse verwendest,
+        <a href="https://www.google.com/settings/security/lesssecureapps" target="_blank">aktiviere weniger sicher Apps</a>,
+        bevor du fortfährst.
     </p>
 
     <input type="submit" value="Account erstellen">

@@ -25,7 +25,7 @@ Dieses Paket benötigt:
  - Eine leere MySql- oder MariaDB-Datenbank
     - Ein Datenbank-Nutzer mit allen Rechten für diese Datenbank (und einem sehr sicheren Passwort!)
  - Eine Domain oder Subdomain, auf der die Seite läuft (dies muss _kein_ Root-Verzeichnis sein)
- - Einen Gmail-Account zum senden von E-Mails
+ - Einen Gmail-Account
 
 ## Installation
 

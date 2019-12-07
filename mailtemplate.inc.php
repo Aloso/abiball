@@ -1,30 +1,36 @@
 <?php
 
-require_once 'PHPMailer-master/class.phpmailer.php';
-require_once 'PHPMailer-master/class.smtp.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once 'PHPMailer-master/src/Exception.php';
+require_once 'PHPMailer-master/src/PHPMailer.php';
+require_once 'PHPMailer-master/src/SMTP.php';
 
 function phpmailerSend($adress, $subject, $htmlMailBody, $mailBody = '') {
     global $meta;
-    
-    $mail = new PHPMailer;
-    
-    $mail->SMTPDebug = 0;                                 // debugging: 1 = errors and messages, 2 = messages only
-    $mail->isSMTP();                                      // Set mailer to use SMTP
-    $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
-    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = $meta['webmasterMail'];             // SMTP username
-    $mail->Password = WebmasterPassword;                  // SMTP password
-    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port = 465;
-    
-    $mail->setFrom($meta['webmasterMail']);
-    $mail->addAddress($adress);
-    $mail->addReplyTo($meta['webmasterMail']);
-    
-    $mail->isHTML(true);                                  // Set email format to HTML
-    
-    $mail->Subject = utf8_decode($subject);
-    $mail->Body = '<html>
+
+    $mail = new PHPMailer(true);
+
+    try {
+        if (useSmtp) {
+            $mail->SMTPDebug = 0;                                 // debugging: 1 = errors and messages, 2 = messages only
+            $mail->isSMTP();                                      // Set mailer to use SMTP
+            $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+            $mail->SMTPAuth = true;                               // Enable SMTP authentication
+            $mail->Username = $meta['webmasterMail'];             // GMail username (email address)
+            $mail->Password = WebmasterPassword;                  // GMail password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+        }
+
+        $mail->setFrom($meta['webmasterMail']);
+        $mail->addAddress($adress);
+        $mail->addReplyTo($meta['webmasterMail']);
+
+        $mail->isHTML(true);
+        $mail->Subject = utf8_decode($subject);
+        $mail->Body = '<html>
 <head>
     <title>Aktivieren Sie Ihren Account</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,400i,700" rel="stylesheet">
@@ -36,11 +42,13 @@ function phpmailerSend($adress, $subject, $htmlMailBody, $mailBody = '') {
     </div>
 </body>
 </html>';
-    
-    $mail ->AltBody = $mailBody;
-    
-    $result = $mail->send();
-    if (!$result) echo $mail->ErrorInfo;
-    
-    return $result;
+
+        $mail ->AltBody = $mailBody;
+
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        echo '<span style="color: red">Email-Fehler: ' . $mail->ErrorInfo . '</span>';
+        return false;
+    }
 }

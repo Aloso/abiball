@@ -7,17 +7,17 @@
         * {
             font-family: "Open Sans", sans-serif;
         }
-        
+
         body {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         form span {
             display: inline-block;
             width: 220px;
         }
-        
+
         input[type=text] {
             border: 1px solid #aaaaaa;
             border-radius: 3px;
@@ -26,11 +26,11 @@
             width: 300px;
             margin: 8px 0 0 0;
         }
-        
+
         input[type=text]:hover, input[type=text]:focus {
             border: 1px solid #006bc7;
         }
-        
+
         input[type=submit], .button {
             border: 1px solid #bbbbbb;
             border-radius: 3px;
@@ -41,13 +41,13 @@
             background-color: #eeeeee;
             margin: 8px 0 0 0;
         }
-        
+
         input[type=submit]:hover, .button:hover {
             color: black;
             border: 1px solid #aaaaaa;
             background-color: #e1e1e1;
         }
-        
+
         input[type=submit]:active, .button:active {
             color: white;
             border: 1px solid #005bcb;
@@ -115,25 +115,27 @@ include '../mailtemplate.inc.php';
 
 $text = 'Dies ist eine Testnachricht.';
 
-phpmailerSend($email, 'Dies ist ein Test', '<h1 style="margin-top:0">Test</h1>' . $text, $text);
+$result = phpmailerSend($email, 'Dies ist ein Test', '<h1 style="margin-top:0">Test</h1>' . $text, $text);
 
-echo '<h1>Nächste Schritte</h1>
+if ($result) {
+    echo '<h1>Nächste Schritte</h1>
 
-<ol>
-    <li><a href="../index.php" target="_blank">Anmeldung</a><br>
-        Dein Passwort: <b>adminadmin</b></li>
-    <li><a href="../changePassword.php" target="_blank">Passwort ändern</a></li>
-    <li><b>Lösche</b> folgende Dateien im <i>resources</i> Ordner:
-        <ul>
-            <li>create.php</li>
-            <li>create2.php</li>
-            <li>create3.php</li>
-        </ul></li>
-    <li><a href="../admin/settings.php" target="_blank">Einstellungen anpassen</a></li>
-    <li><a href="../admin/useruebersicht.php" target="_blank">Die User hinzufügen</a></li>
-    <li><a href="../admin/pageTexts.php" target="_blank">Seitentexte anpassen</a><br>
-        Zur Formatierung siehe Tipps am Seitenende.</li>
-</ol>';
+    <ol>
+        <li><a href="../index.php" target="_blank">Anmeldung</a><br>
+            Dein Passwort: <b>adminadmin</b></li>
+        <li><a href="../changePassword.php" target="_blank">Passwort ändern</a></li>
+        <li><b>Lösche</b> folgende Dateien im <i>resources</i> Ordner:
+            <ul>
+                <li>create.php</li>
+                <li>create2.php</li>
+                <li>create3.php</li>
+            </ul></li>
+        <li><a href="../admin/settings.php" target="_blank">Einstellungen anpassen</a></li>
+        <li><a href="../admin/useruebersicht.php" target="_blank">Die User hinzufügen</a></li>
+        <li><a href="../admin/pageTexts.php" target="_blank">Seitentexte anpassen</a><br>
+            Zur Formatierung siehe Tipps am Seitenende.</li>
+    </ol>';
+}
 
 ?>
 </body>
