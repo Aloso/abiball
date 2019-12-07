@@ -1,38 +1,38 @@
 # Abiball-Kartenbestellungen
-Eine Website zur Kartenbestellung &amp; Organisation von Abibällen
+Eine Website zur Kartenbestellung & Organisation von Abibällen
 
 ## Testumgebung
 
-Du kannst die Website hier kostenlos ausprobieren, sowohl als User, als auch als Admin: <a href="https://abiball.000webhostapp.com">abiball.000webhostapp.com</a>
-
-* Standardpasswort: Abitur17
-* User-Account: Rabe Socke, Passwort 12345678
-* Admin-Account: Meister Eder, Passwort 12345678
-
-Bitte ändere nicht diese Anmeldedaten (oder zumindest nicht dauerhaft).
-
-Falls du dich nicht anmelden kannst, weil jemand die Daten verändert hat, schreib mich auf Telegram an und ich setze es zurück:
-https://t.me/joinchat/AAAAAEF9Ddvu9ancJ730zA
+Es ist im Moment keine Testumgebung eingerichtet. Falls du mehr über das Projekt wissen willst, kannst du mich direkt [auf Telegram](https://t.me/joinchat/AAAAAEF9Ddvu9ancJ730zA) anschreiben.
 
 ## Idee und Entwicklung
-Diese Website wurde erstellt, um den Organisationsaufwand für den diesjährigen Abiball weitestgehend in Grenzen zu halten
+
+Diese Website wurde erstellt, um den Organisationsaufwand für den Abiball am LMGU weitestgehend in Grenzen zu halten
 und um auf das ewige Listenführen verzichten zu können. Matthias Kammüller hat für diesen Zweck eine Website in PHP programmiert.
 
-Ich habe im Jahr darauf die Website verbessert und nun **fast komplett neu geschrieben**, da sich einige Fehler eingeschlichen haben und das Projekt unübersichtlich geworden ist. Ich habe nur das Design größtenteils übernommen und Teile des Scripts für die PDF-Rechnung wiederverwendet. Ich habe mich besonders bemüht, die Website flexibel zu gestalten (viele Einstellungsmöglichkeiten in der Admin-Konsole) und sie übersichtlicher zu machen.
+Ich habe im Jahr darauf die Website verbessert und nun fast komplett neu geschrieben, da sich einige Fehler eingeschlichen haben und das Projekt unübersichtlich geworden ist. Ich habe nur das Design größtenteils übernommen und Teile des Scripts für die PDF-Rechnung wiederverwendet.
+
+Ich habe mich besonders bemüht, die Website flexibel zu gestalten (viele Einstellungsmöglichkeiten) und sie übersichtlicher zu machen. Außerdem habe ich Installationsscripte erstellt, sodass **keine PHP-Kenntnisse nötig** sind.
+
+Die Website achtet darauf, alle Eingaben zu bereinigen und ist auf Sichheit bedacht.
 
 ## Voraussetzungen & Installation
+
 Dieses Paket benötigt:
--	Einen Server mit PHP5- oder PHP7-Unterstützung 
--	Eine leere MySQL- oder MariaDB-Datenbank
--	Eine Domain oder Subdomain, auf der der Inhalt läuft (dies muss KEIN Root-Verzeichnis sein)
--	Eine Domain, auf die zugegriffen werden soll
--   Einen Gmail-Account zum senden von E-Mails
+
+ - Einen Server mit PHP 5 oder PHP 7
+    - falls du PHP manuell installierst, achte darauf, dass die Erweiterungen `mysqli` und `iconv` in der `php.ini` aktiviert sind und PHP Schreibrechte hat
+ - Eine leere MySql- oder MariaDB-Datenbank
+    - Ein Datenbank-Nutzer mit allen Rechten für diese Datenbank (und einem sehr sicheren Passwort!)
+ - Eine Domain oder Subdomain, auf der die Seite läuft (dies muss _kein_ Root-Verzeichnis sein)
+ - Einen Gmail-Account zum senden von E-Mails
 
 ## Installation
-1.  Hochladen der Dateien auf einen Webserver
-2.  Erstellen einer Datenbank und eines zugehörigen DB-Nutzers
-3.  Öffnen der Datei „resources/create.php“ im Browser
-4.  Folgen der Anweisungen, bis die Seite einsatzbereit ist
+
+ 1. Hochladen der Dateien auf einen Webserver
+ 2. Erstellen einer Datenbank und eines zugehörigen DB-Nutzers
+ 3. Öffnen der Datei „resources/create.php“ im Browser
+ 4. Folgen der Anweisungen, bis die Seite einsatzbereit ist
 
 ## Funktionen
 
@@ -40,17 +40,16 @@ Dieses Paket benötigt:
 
 Ein User hat auf der Website folgende Möglichkeiten:
 
-* Account registrieren und mit E-Mail verifizieren
-
-  Voraussetzung: Ein Admin hat den Account bereits erstellt. Dadurch sind nur bestimmte Personen zugelassen.
-* Anmelden, Abmelden
-* Startseite: Neuigkeiten lesen
-* Kartenbestellung: Informationen lesen, Karte für sich bestellen, danach Karten für andere bestellen
-* Forum: Forenbeiträge lesen und schreiben. Es wird &#42;&#42;fetter Text&#42;&#42; und &#95;&#95;kursiver Text&#95;&#95; unterstützt.
-* Location: Google Maps Karte ansehen, zoomen, etc.
-* Sitzplätze: Es können bis zu n Wünsche (einstellbar) angegeben werden, wer mit am Tisch sitzen soll. Diese können unterschiedlich gewichtet werden.
-* Impressum: Webmaster per E-Mail kontaktieren
-* Profil: Passwort / E-Mailadresse ändern, Empfänger von bestellten Karten ändern, Rechnung als PDF speichern
+ - Account registrieren und mit E-Mail verifizieren
+   - Voraussetzung: Ein Admin hat den Account bereits erstellt. Dadurch sind nur bestimmte Personen zugelassen.
+ - Anmelden, Abmelden
+ - Startseite: Neuigkeiten lesen
+ - Kartenbestellung: Informationen lesen, Karte für sich bestellen, danach Karten für andere bestellen
+ - Forum: Forenbeiträge lesen und schreiben. Es wird `**fetter Text**` und `__kursiver Text__` unterstützt.
+ - Location: Google-Maps-Integration
+ - Sitzplätze: Es können bis zu _n_ Wünsche (einstellbar) angegeben werden, wer mit am Tisch sitzen soll. Diese können unterschiedlich gewichtet werden.
+ - Impressum: Webmaster per E-Mail kontaktieren
+ - Profil: Passwort / E-Mailadresse ändern, Empfänger von bestellten Karten ändern, Rechnung als PDF speichern
 
 ### Admin-Bereich
 
@@ -59,7 +58,7 @@ Der Admin hat alle Möglichkeiten, die ein User hat. Zusätzlich hat er folgende
 * Accounts erstellen (damit ein User seinen Account registrieren kann, muss er zuvor von einem Admin erstellt worden sein)
 * Alle User tabellarisch sehen. Auf Spaltenname klicken, um sie zu sortieren (so kann man besonders schnell einen Namen oder eine E-Mailadresse finden. Man kann User nach Rechten filtern und sehen, wer zuletzt online war und wann)
 * Auf Nachname klicken, um dessen Profil zu ändern. Insbesondere kann man
-  
+
   * E-Mailadresse ändern
   * Status ändern (Vorsicht!)
   * Passwort ändern
