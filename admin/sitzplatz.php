@@ -128,8 +128,8 @@ while (($row = $data->fetch_assoc()) != null) {
     }
 
     function revalidateTables() {
-        for (var i = 0; i < tische.length; i++) {
-            var tisch = tische[i];
+        for (var i = 0; i < tables.length; i++) {
+            var tisch = tables[i];
             tisch.personen = 0;
 
             for (var j = 0; j < userData.length; j++) {
@@ -154,11 +154,21 @@ while (($row = $data->fetch_assoc()) != null) {
     *       isSelected: boolean
     * }>} */
     var userData = <?php echo json_encode($bestellData); ?>;
+    var idx = 0;
+    var storedUserData = localStorage.userData ? JSON.parse(localStorage.userData) : {};
+
     for (i = 0; i < userData.length; i++) {
         var user = userData[i];
-        user.pos = {x: 40 * (i % 10) + 30, y: 30 + (i - i % 10) / 10 * 40};
-        userSort[+user["id"]] = user;
+        var id = +user["id"];
+        userSort[id] = user;
         user.isSelected = false;
+
+        if (id in storedUserData) {
+            user.pos = storedUserData[id]
+        } else {
+            user.pos = {x: 40 * (idx % 10) + 30, y: 30 + (idx - idx % 10) / 10 * 40};
+            idx++;
+        }
     }
 
     /** @type {Array.<{
@@ -186,7 +196,8 @@ while (($row = $data->fetch_assoc()) != null) {
         lineData[i++] = lineData[x];
     }
 
-    var tische = [];
+    var tables = [];
+    if (localStorage.tables) tables = JSON.parse(localStorage.tables)
 
 
 
@@ -202,10 +213,10 @@ while (($row = $data->fetch_assoc()) != null) {
 
     var radiusSmall = 18;
     var radiusBig = 28;
-    var durchmesserSmall = radiusSmall * 2 - 7;
-    var durchmesserBig = radiusBig * 2 - 4;
+    var diameterSmall = radiusSmall * 2 - 7;
+    var diameterBig = radiusBig * 2 - 4;
 
-    var minPrioritaet = 1;
+    var minPriority = 1;
     var showAllNames = false;
     var epsilon = 20;
 
@@ -216,6 +227,8 @@ while (($row = $data->fetch_assoc()) != null) {
 
     var focusedUser = null;
     var selectedUser = [];
+
+    var positionsChanged = false;
 
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
@@ -239,12 +252,12 @@ while (($row = $data->fetch_assoc()) != null) {
     };
 
     buttons.deleteTables.onclick = function () {
-        tische = [];
+        tables = [];
         redraw();
     };
 
     buttons.hideThinLines.oninput = buttons.hideThinLines.onkeyup = function () {
-        minPrioritaet = buttons.hideThinLines.value;
+        minPriority = buttons.hideThinLines.value;
         redraw();
     };
 
@@ -390,7 +403,7 @@ while (($row = $data->fetch_assoc()) != null) {
                     xbg = Math.round(xbg / epsilon) * epsilon;
                     ybg = Math.round(ybg / epsilon) * epsilon;
 
-                    tische.push({x1: xsm, y1: ysm, x2: xbg, y2: ybg, personen: 0});
+                    tables.push({x1: xsm, y1: ysm, x2: xbg, y2: ybg, personen: 0});
                     revalidateTables();
                 }
 
@@ -421,6 +434,7 @@ while (($row = $data->fetch_assoc()) != null) {
     };
 
     function redraw() {
+        positionsChanged = true;
         canvas.width = canvas.width;
 
         switch (mode) {
@@ -449,6 +463,18 @@ while (($row = $data->fetch_assoc()) != null) {
 
     redraw();
 
+    setInterval(function () {
+        if (positionsChanged) {
+            localStorage.tables = JSON.stringify(tables);
+
+            var storedUserData = {}
+            userData.forEach(function (user) {
+                storedUserData[user.id] = user.pos;
+            })
+            localStorage.userData = JSON.stringify(storedUserData)
+        }
+    }, 500)
+
 
     function basicRedraw() {
         var dpr = window.devicePixelRatio;
@@ -457,8 +483,8 @@ while (($row = $data->fetch_assoc()) != null) {
 
         var endAngle = 2 * Math.PI;
 
-        for (var i = 0; i < tische.length; i++) {
-            var tisch = tische[i];
+        for (var i = 0; i < tables.length; i++) {
+            var tisch = tables[i];
 
             context.strokeStyle = "#999999";
             context.fillStyle = "#F7F7F7";
@@ -478,7 +504,7 @@ while (($row = $data->fetch_assoc()) != null) {
         context.strokeStyle = "rgba(255, 0, 0, 0.4)";
         for (i = 0; i < lineData.length; i++) {
             var line = lineData[i];
-            if (line.prioritaet < minPrioritaet) continue;
+            if (line.prioritaet < minPriority) continue;
 
             var user1 = userSort[+line["u1id"]];
             var user2 = userSort[+line["u2id"]];
@@ -511,7 +537,7 @@ while (($row = $data->fetch_assoc()) != null) {
                 context.fill();
                 context.fillStyle = "#000000";
                 context.font = (18 * dpr) + "px Roboto";
-                context.fillText(user.anzahl, user.pos.x * dpr, (user.pos.y + 7) * dpr, durchmesserSmall * dpr);
+                context.fillText(user.anzahl, user.pos.x * dpr, (user.pos.y + 7) * dpr, diameterSmall * dpr);
                 context.stroke();
             }
         } else {
@@ -537,8 +563,8 @@ while (($row = $data->fetch_assoc()) != null) {
 
                 context.fill();
                 context.fillStyle = "#000000";
-                context.fillText(user.vorname, user.pos.x * dpr, (user.pos.y - 4) * dpr, durchmesserBig * dpr);
-                context.fillText(user.nachname, user.pos.x * dpr, (user.pos.y + 10) * dpr, durchmesserBig * dpr);
+                context.fillText(user.vorname, user.pos.x * dpr, (user.pos.y - 4) * dpr, diameterBig * dpr);
+                context.fillText(user.nachname, user.pos.x * dpr, (user.pos.y + 10) * dpr, diameterBig * dpr);
                 context.stroke();
             }
         }
