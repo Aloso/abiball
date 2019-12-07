@@ -47,7 +47,7 @@ while (($row = $data->fetch_assoc()) != null) {
             border-style: none;
             padding: 0;
         }
-        
+
         #header {
             background-color: #eeeeee;
             border-bottom: 1px solid #cccccc;
@@ -74,9 +74,9 @@ while (($row = $data->fetch_assoc()) != null) {
             border: 1px solid #bbbbbb;
             font-size: 94%;
             border-radius: 3px;
-            width: 50px;
+            width: 30px;
         }
-        
+
         #canvas {
             position: fixed;
             left: 0;
@@ -85,7 +85,7 @@ while (($row = $data->fetch_assoc()) != null) {
             bottom: 0;
             cursor: default;
         }
-        
+
         #overlay {
             position: fixed;
             left: 0;
@@ -99,14 +99,14 @@ while (($row = $data->fetch_assoc()) != null) {
 <body>
 <div id="header">
     <b>Sitzplaner</b> &nbsp;
-    <button id="createTable">Tisch erstellen</button> &nbsp;
+    <button id="createTable">Neuer Tisch</button> &nbsp;
     <button id="deleteTables">Tische löschen</button> &nbsp;
-    <button id="showAllNames">Alle Namen zeigen</button> &nbsp;
-    Linien verbergen die schmaler sind als: <input type="number" id="hideThinLines" value="1" min="1">
+    <button id="showAllNames">Namen zeigen</button> &nbsp;
+    Linien schmaler als <input type="number" id="hideThinLines" value="1" min="1"> verbergen
 </div>
 <canvas id="canvas">Dieser Browser ist veraltet und unterstützt das Canvas-Element nicht.</canvas>
 
-<!--suppress SillyAssignmentJS -->
+<!--suppress SillyAssignmentJS, ES6ConvertVarToLetConst -->
 <script type="text/javascript">
     "use strict";
     var i;
@@ -126,12 +126,12 @@ while (($row = $data->fetch_assoc()) != null) {
         return posX >= rectX1 && posX <= rectX2 &&
                posY >= rectY1 && posY <= rectY2;
     }
-    
+
     function revalidateTables() {
         for (var i = 0; i < tische.length; i++) {
             var tisch = tische[i];
             tisch.personen = 0;
-            
+
             for (var j = 0; j < userData.length; j++) {
                 var user = userData[j];
                 if (isOnRect(user.pos.x, user.pos.y, tisch.x1, tisch.y1, tisch.x2, tisch.y2)) {
@@ -140,9 +140,9 @@ while (($row = $data->fetch_assoc()) != null) {
             }
         }
     }
-    
+
     var userSort = [];
-    
+
     /** @type {Array.<{
     *       id: string,
     *       vorname: string,
@@ -160,7 +160,7 @@ while (($row = $data->fetch_assoc()) != null) {
         userSort[+user["id"]] = user;
         user.isSelected = false;
     }
-    
+
     /** @type {Array.<{
     *       prioritaet: string,
     *       u1id: string,
@@ -185,11 +185,11 @@ while (($row = $data->fetch_assoc()) != null) {
     for (var x in lineData) {
         lineData[i++] = lineData[x];
     }
-    
+
     var tische = [];
-    
-    
-    
+
+
+
     var modes = {
         NONE: 0,
         DRAG: 1,
@@ -204,11 +204,11 @@ while (($row = $data->fetch_assoc()) != null) {
     var radiusBig = 28;
     var durchmesserSmall = radiusSmall * 2 - 7;
     var durchmesserBig = radiusBig * 2 - 4;
-    
+
     var minPrioritaet = 1;
     var showAllNames = false;
     var epsilon = 20;
-    
+
     var mousePos = { x: 0, y: 0 };
     var oldMousePos = mousePos;
     var mouseDownPos = mousePos;
@@ -216,7 +216,7 @@ while (($row = $data->fetch_assoc()) != null) {
 
     var focusedUser = null;
     var selectedUser = [];
-    
+
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
     var buttons = {
@@ -230,9 +230,11 @@ while (($row = $data->fetch_assoc()) != null) {
         if (mode !== modes.CREATE_TABLE) {
             mode = modes.CREATE_TABLE;
             buttons.createTable.innerHTML = "Abbrechen";
+            canvas.style.backgroundImage = 'url("../resources/raster.png")';
         } else {
             mode = modes.NONE;
-            buttons.createTable.innerHTML = "Tisch erstellen";
+            buttons.createTable.innerHTML = "Neuer Tisch";
+            canvas.style.backgroundImage = 'none';
         }
     };
 
@@ -240,26 +242,31 @@ while (($row = $data->fetch_assoc()) != null) {
         tische = [];
         redraw();
     };
-    
+
     buttons.hideThinLines.oninput = buttons.hideThinLines.onkeyup = function () {
         minPrioritaet = buttons.hideThinLines.value;
         redraw();
     };
-    
+
     buttons.showAllNames.onclick = function () {
         showAllNames = !showAllNames;
-        buttons.showAllNames.innerHTML = showAllNames ? "Namen verbergen" : "Alle Namen zeigen";
+        buttons.showAllNames.innerHTML = showAllNames ? "Namen verbergen" : "Namen zeigen";
         redraw();
     };
-    
-    
+
+
     window.onresize = function () {
-        canvas.width = getWindowWidth();
-        canvas.height = getWindowHeight() - 40;
+        var dpr = window.devicePixelRatio;
+        var w = getWindowWidth();
+        var h = getWindowHeight() - 40;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
         redraw();
     };
-    window.onresize();
-    
+    window.onresize(null);
+
     window.onmousemove = function (e) {
         e = e || window.event;
         oldMousePos = mousePos;
@@ -289,7 +296,7 @@ while (($row = $data->fetch_assoc()) != null) {
             x: e.clientX,
             y: e.clientY - 40
         };
-    
+
         switch (mode) {
             case modes.NONE:
                 if (focusedUser !== null) {
@@ -300,7 +307,7 @@ while (($row = $data->fetch_assoc()) != null) {
                             }
                             selectedUser = [];
                         }
-                        
+
                         mode = modes.DRAG;
                         mouseDownPos = focusedUser.pos;
                         mouseDownOffset = {
@@ -320,24 +327,23 @@ while (($row = $data->fetch_assoc()) != null) {
                             userData[i].isSelected = false;
                         }
                     }
-                    
+
                     mode = modes.NORMAL_DRAG;
                     mouseDownPos = mousePos;
                 }
                 break;
             case modes.CREATE_TABLE:
-                canvas.style.backgroundImage = 'url("../resources/raster.png")';
                 selectedUser = [];
                 for (i = 0; i < userData.length; i++) {
                     userData[i].isSelected = false;
                 }
-                
+
                 mode = modes.CREATE_TABLE_DRAG;
                 mouseDownPos = mousePos;
-    
+
                 mouseDownPos.x = Math.round(mouseDownPos.x / epsilon) * epsilon;
                 mouseDownPos.y = Math.round(mouseDownPos.y / epsilon) * epsilon;
-                
+
                 break;
             default:
                 selectedUser = [];
@@ -355,9 +361,9 @@ while (($row = $data->fetch_assoc()) != null) {
             x: e.clientX,
             y: e.clientY - 40
         };
-        
-        canvas.style.backgroundImage = 'none';
-    
+
+        var xsm, ysm, xbg, ybg
+
         switch (mode) {
             case modes.NONE:
                 break;
@@ -367,33 +373,34 @@ while (($row = $data->fetch_assoc()) != null) {
                 break;
             case modes.CREATE_TABLE_DRAG:
                 mode = modes.CREATE_TABLE;
-    
-                var xsm = Math.min(mousePos.x, mouseDownPos.x);
-                var ysm = Math.min(mousePos.y, mouseDownPos.y);
-                var xbg = Math.max(mousePos.x, mouseDownPos.x);
-                var ybg = Math.max(mousePos.y, mouseDownPos.y);
-                
+
+                xsm = Math.min(mousePos.x, mouseDownPos.x);
+                ysm = Math.min(mousePos.y, mouseDownPos.y);
+                xbg = Math.max(mousePos.x, mouseDownPos.x);
+                ybg = Math.max(mousePos.y, mouseDownPos.y);
+
                 // Teste, ob der Tisch klein genug ist, dass der Tisch sofort gelöscht wird
                 if (isOnCircle(xsm, ysm, xbg, ybg, 30)) {
                     mode = modes.NONE;
-                    buttons.createTable.innerHTML = "Tisch erstellen";
+                    canvas.style.backgroundImage = 'none';
+                    buttons.createTable.innerHTML = "Neuer Tisch";
                 } else {
                     xsm = Math.round(xsm / epsilon) * epsilon;
                     ysm = Math.round(ysm / epsilon) * epsilon;
                     xbg = Math.round(xbg / epsilon) * epsilon;
                     ybg = Math.round(ybg / epsilon) * epsilon;
-                    
+
                     tische.push({x1: xsm, y1: ysm, x2: xbg, y2: ybg, personen: 0});
                     revalidateTables();
                 }
-                
+
                 break;
             case modes.NORMAL_DRAG:
                 xsm = Math.min(mousePos.x, mouseDownPos.x);
                 ysm = Math.min(mousePos.y, mouseDownPos.y);
                 xbg = Math.max(mousePos.x, mouseDownPos.x);
                 ybg = Math.max(mousePos.y, mouseDownPos.y);
-                
+
                 for (i = 0; i < userData.length; i++) {
                     var user = userData[i];
                     if (!user.isSelected && isOnRect(user.pos.x, user.pos.y, xsm, ysm, xbg, ybg)) {
@@ -402,18 +409,20 @@ while (($row = $data->fetch_assoc()) != null) {
                     }
                 }
                 mode = modes.NONE;
+                canvas.style.backgroundImage = 'none';
                 break;
             case modes.MULTI_DRAG:
                 mode = modes.NONE;
+                canvas.style.backgroundImage = 'none';
                 revalidateTables();
                 break;
         }
         redraw();
     };
-    
+
     function redraw() {
         canvas.width = canvas.width;
-        
+
         switch (mode) {
             case modes.CREATE_TABLE:
             case modes.NONE:
@@ -428,7 +437,7 @@ while (($row = $data->fetch_assoc()) != null) {
                 var diffX = mousePos.x - mouseDownPos.x;
                 var diffY = mousePos.y - mouseDownPos.y;
                 mouseDownPos = mousePos;
-                
+
                 for (i = 0; i < selectedUser.length; i++) {
                     var user = selectedUser[i];
                     user.pos.x += diffX;
@@ -437,149 +446,150 @@ while (($row = $data->fetch_assoc()) != null) {
         }
         basicRedraw();
     }
-    
+
     redraw();
-    
-    
+
+
     function basicRedraw() {
-        context.lineWidth = 0.4;
+        var dpr = window.devicePixelRatio;
+        context.lineWidth = 0.4 * dpr;
         context.textAlign = "center";
-        
+
         var endAngle = 2 * Math.PI;
-        
+
         for (var i = 0; i < tische.length; i++) {
             var tisch = tische[i];
-            
+
             context.strokeStyle = "#999999";
             context.fillStyle = "#F7F7F7";
             context.textAlign = "right";
-            
-            context.fillRect(tisch.x1, tisch.y1, tisch.x2 - tisch.x1, tisch.y2 - tisch.y1);
-            context.strokeRect(tisch.x1, tisch.y1, tisch.x2 - tisch.x1, tisch.y2 - tisch.y1);
-    
+
+            context.fillRect(tisch.x1 * dpr, tisch.y1 * dpr, (tisch.x2 - tisch.x1) * dpr, (tisch.y2 - tisch.y1) * dpr);
+            context.strokeRect(tisch.x1 * dpr, tisch.y1 * dpr, (tisch.x2 - tisch.x1) * dpr, (tisch.y2 - tisch.y1) * dpr);
+
             context.fillStyle = "#BBBBBB";
-            context.font = "18px Roboto";
-            context.fillText(tisch.personen, tisch.x2 - 7, tisch.y1 + 22);
-    
+            context.font = (18 * dpr) + "px Roboto";
+            context.fillText(tisch.personen, (tisch.x2 - 7) * dpr, (tisch.y1 + 22) * dpr);
+
             context.textAlign = "center";
             context.strokeStyle = "#000000";
         }
-        
+
         context.strokeStyle = "rgba(255, 0, 0, 0.4)";
         for (i = 0; i < lineData.length; i++) {
             var line = lineData[i];
             if (line.prioritaet < minPrioritaet) continue;
-            
+
             var user1 = userSort[+line["u1id"]];
             var user2 = userSort[+line["u2id"]];
-            
+
             context.beginPath();
-            context.lineWidth = line.prioritaet * 0.7;
-            context.moveTo(user1.pos.x, user1.pos.y);
-            context.lineTo(user2.pos.x, user2.pos.y);
+            context.lineWidth = line.prioritaet * 0.7 * dpr;
+            context.moveTo(user1.pos.x * dpr, user1.pos.y * dpr);
+            context.lineTo(user2.pos.x * dpr, user2.pos.y * dpr);
             context.stroke();
         }
         if (!showAllNames) {
-            context.lineWidth = 0.4;
+            context.lineWidth = 0.4 * dpr;
             for (i = 0; i < userData.length; i++) {
                 var user = userData[i];
                 context.beginPath();
-                context.arc(user.pos.x, user.pos.y, radiusSmall, 0, endAngle, false);
-        
+                context.arc(user.pos.x * dpr, user.pos.y * dpr, radiusSmall * dpr, 0, endAngle, false);
+
                 if (user === focusedUser) context.fillStyle = "#DDDDDD";
                 else context.fillStyle = "#EEEEEE";
-        
+
                 if (user.isSelected) {
                     context.strokeStyle = "#0065dd";
-                    context.lineWidth = 2;
+                    context.lineWidth = 2 * dpr;
                     context.fillStyle = "#cbe5f9";
                 } else {
                     context.strokeStyle = "#000000";
-                    context.lineWidth = 0.4;
+                    context.lineWidth = 0.4 * dpr;
                 }
-        
+
                 context.fill();
                 context.fillStyle = "#000000";
-                context.font = "18px Roboto";
-                context.fillText(user.anzahl, user.pos.x, user.pos.y + 7, durchmesserSmall);
+                context.font = (18 * dpr) + "px Roboto";
+                context.fillText(user.anzahl, user.pos.x * dpr, (user.pos.y + 7) * dpr, durchmesserSmall * dpr);
                 context.stroke();
             }
         } else {
-            context.lineWidth = 0.4;
-            context.font = "12px Roboto";
-            
+            context.lineWidth = 0.4 * dpr;
+            context.font = (12 * dpr) + "px Roboto";
+
             for (i = 0; i < userData.length; i++) {
                 user = userData[i];
                 context.beginPath();
-                context.arc(user.pos.x, user.pos.y, radiusBig, 0, endAngle, false);
-        
+                context.arc(user.pos.x * dpr, user.pos.y * dpr, radiusBig * dpr, 0, endAngle, false);
+
                 if (user === focusedUser) context.fillStyle = "#DDDDDD";
                 else context.fillStyle = "#EEEEEE";
-    
+
                 if (user.isSelected) {
                     context.strokeStyle = "#0065dd";
-                    context.lineWidth = 2;
+                    context.lineWidth = 2 * dpr;
                     context.fillStyle = "#cbe5f9";
                 } else {
                     context.strokeStyle = "#000000";
-                    context.lineWidth = 0.4;
+                    context.lineWidth = 0.4 * dpr;
                 }
-                
+
                 context.fill();
                 context.fillStyle = "#000000";
-                context.fillText(user.vorname, user.pos.x, user.pos.y - 4, durchmesserBig);
-                context.fillText(user.nachname, user.pos.x, user.pos.y  + 10, durchmesserBig);
+                context.fillText(user.vorname, user.pos.x * dpr, (user.pos.y - 4) * dpr, durchmesserBig * dpr);
+                context.fillText(user.nachname, user.pos.x * dpr, (user.pos.y + 10) * dpr, durchmesserBig * dpr);
                 context.stroke();
             }
         }
-        
-        
+
+
         context.strokeStyle = "#000000";
-        context.lineWidth = 0.4;
+        context.lineWidth = 0.4 * dpr;
         if (mode === modes.CREATE_TABLE) {
             context.fillStyle = "#2277ff";
-            context.font = "16px Roboto";
-    
-            context.fillText("Klicken und ziehen, um", mousePos.x, mousePos.y - 60);
-            context.fillText("einen Tisch zu erstellen", mousePos.x, mousePos.y - 35);
-            context.fillText("Klicken zum abbrechen", mousePos.x, mousePos.y + 50);
-        
+            context.font = (16 * dpr) + "px Roboto";
+
+            context.fillText("Klicken und ziehen, um", mousePos.x * dpr, (mousePos.y - 60) * dpr);
+            context.fillText("einen Tisch zu erstellen", mousePos.x * dpr, (mousePos.y - 35) * dpr);
+            context.fillText("Klicken zum abbrechen", mousePos.x * dpr, (mousePos.y + 50) * dpr);
+
             context.textAlign = "center";
         } else if (mode === modes.CREATE_TABLE_DRAG || mode === modes.NORMAL_DRAG) {
             context.strokeStyle = "#2277ff";
             context.fillStyle = "rgba(0, 107, 255, 0.2)";
-            context.fillRect(mouseDownPos.x, mouseDownPos.y,
-                    mousePos.x - mouseDownPos.x, mousePos.y - mouseDownPos.y);
-            context.strokeRect(mouseDownPos.x, mouseDownPos.y,
-                    mousePos.x - mouseDownPos.x, mousePos.y - mouseDownPos.y);
-    
+            context.fillRect(mouseDownPos.x * dpr, mouseDownPos.y * dpr,
+                    (mousePos.x - mouseDownPos.x) * dpr, (mousePos.y - mouseDownPos.y) * dpr);
+            context.strokeRect(mouseDownPos.x * dpr, mouseDownPos.y * dpr,
+                    (mousePos.x - mouseDownPos.x) * dpr, (mousePos.y - mouseDownPos.y) * dpr);
+
             context.strokeStyle = "#000000";
         }
         if (focusedUser !== null && mode !== modes.DRAG && mode !== modes.MULTI_DRAG && !showAllNames) {
             user = focusedUser;
             context.fillStyle = "#F7F7F7";
-            
-            context.fillRect(user.pos.x - 70.5, user.pos.y - 65.5, 140, 43);
-            context.strokeRect(user.pos.x - 70.5, user.pos.y - 65.5, 140, 43);
-            
+
+            context.fillRect((user.pos.x - 70.5) * dpr, (user.pos.y - 65.5) * dpr, 140 * dpr, 43 * dpr);
+            context.strokeRect((user.pos.x - 70.5) * dpr, (user.pos.y - 65.5) * dpr, 140 * dpr, 43 * dpr);
+
             context.fillStyle = "#000000";
-            context.font = "14px Roboto";
-            
-            context.fillText(user.vorname, user.pos.x, user.pos.y - 49, 130);
-            context.fillText(user.nachname, user.pos.x, user.pos.y - 30, 130);
-    
+            context.font = (14 * dpr) + "px Roboto";
+
+            context.fillText(user.vorname, user.pos.x * dpr, (user.pos.y - 49) * dpr, 130 * dpr);
+            context.fillText(user.nachname, user.pos.x * dpr, (user.pos.y - 30) * dpr, 130 * dpr);
+
             context.beginPath();
             context.fillStyle = "#F7F7F7";
-            
-            context.moveTo(user.pos.x - 10, user.pos.y - 23);
-            context.lineTo(user.pos.x,       user.pos.y - 13);
-            context.lineTo(user.pos.x + 10, user.pos.y - 23);
+
+            context.moveTo((user.pos.x - 10) * dpr, (user.pos.y - 23) * dpr);
+            context.lineTo(user.pos.x * dpr,        (user.pos.y - 13) * dpr);
+            context.lineTo((user.pos.x + 10) * dpr, (user.pos.y - 23) * dpr);
             context.fill();
             context.stroke();
         }
     }
-    
-    
+
+
 </script>
 </body>
 </html>
