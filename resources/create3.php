@@ -122,6 +122,9 @@ try {
     phpMailerSend($email, 'Dies ist ein Test', '<h1 style="margin-top:0">Test</h1>' . $text, $text);
 } catch (Exception $e) {
     echo '<span style="color: red">Email-Fehler: ' . $e->errorMessage() . '</span>';
+    echo '<p>Falls die Verbindung fehlschlägt, kann daran SMTP schuld sein.
+    Manche Server (z.B. bplaced, GoDaddy) verbieten SMTP-Verbindungen. Um dies zu umgehen,
+    <a href="create.php">starte die Installation neu</a> und lasse das Gmail-Passwort leer.';
     exit;
 }
 

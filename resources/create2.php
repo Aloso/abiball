@@ -355,7 +355,8 @@ echo '<h1>Admin-Account</h1>
     <label>
         <span>E-Mailadresse:</span>
         <input type="text" name="email" value=""><br>
-        <span></span>Falls du SMTP verwenden willst, muss dies eine GMail-Adresse sein.
+        <span></span> Falls du SMTP verwendest, muss dies eine GMail-Adresse sein.<br>
+        <span></span> Ansonsten wähle eine E-Mailadresse auf der Domain des Webservers (z.B. webmaster@deine.domain.de)
     </label><br>
     <label>
         <span>Vorname:</span>
@@ -366,11 +367,6 @@ echo '<h1>Admin-Account</h1>
         <input type="text" name="nachname" value="">
     </label>
 
-    <p>
-        Warnung: Manche Anbieter (z.B. bplaced, GoDaddy) blockieren SMTP-Verbindungen.
-        Wähle in diesem Fall eine E-Mailadresse auf der Domain des Webservers (z.B. webmaster@deine.domain.de)
-        und ändere danach in der Datei <i>resources/settings.inc.php</i> den Wert "useSmtp" zu <i>false</i>.
-    </p>
     <p>
         Falls du eine GMail-Adresse verwendest,
         <a href="https://www.google.com/settings/security/lesssecureapps" target="_blank">aktiviere weniger sicher Apps</a>,

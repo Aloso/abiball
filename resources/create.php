@@ -62,8 +62,8 @@ if (isset($_POST['defaultPassword']) && isset($_POST['emailPassword']) &&
     isset($_POST['recaptcha1']) && isset($_POST['recaptcha2']) &&
     isset($_POST['host']) && isset($_POST['user']) && isset($_POST['name']) && isset($_POST['pass'])) {
 
-    if ($_POST['defaultPassword'] != '' && $_POST['emailPassword'] != '' &&
-        $_POST['host'] != '' && $_POST['user'] != '' && $_POST['name'] != '' && $_POST['pass'] != '') {
+    if ($_POST['defaultPassword'] != '' && $_POST['host'] != '' &&
+        $_POST['user'] != '' && $_POST['name'] != '' && $_POST['pass'] != '') {
 
         $defaultPassword = $_POST['defaultPassword'];
         $emailPassword = $_POST['emailPassword'];
@@ -97,9 +97,9 @@ if (isset($_POST['defaultPassword']) && isset($_POST['emailPassword']) &&
 
 // Voreingestelltes Passwort
 
-define("DefaultPassword", "' . addslashes($defaultPassword) . '");         // Voreingestelltes Passwort der Accounts
-define("WebmasterPassword", "' . addslashes($emailPassword) . '");  // Passwort für den Gmail Account
-define("useSmtp", true);
+define("DefaultPassword", "' . addslashes($defaultPassword) . '");   // Voreingestelltes Passwort der Accounts
+define("WebmasterPassword", "' . addslashes($emailPassword) . '");   // Passwort für den Gmail Account
+define("useSmtp", ' . ($emailPassword === '' ? 'false' : 'true') . ');
 
 
 // ReCaptcha
@@ -173,6 +173,11 @@ echo '
         <span>GMail Passwort:</span>
         <input type="text" name="emailPassword" value="" required><br>
         <span></span> Passwort des GMail Accounts, von dem die E-Mails gesendet werden sollen
+        <p>
+            Für den E-Mailversand wird normalerweise SMTP verwendet, da die E-Mails dann seltener als Spam eingestuft werden.
+            Falls sich herausstellt, dass dein Webserver keine SMTP-Verbindungen erlaubt,
+            kannst du das Gmail-Passwort leer lassen. Es wird dann die mail()-Funktion verwendet.
+        </p>
     </label>
 
     <h2>ReCaptcha</h2>
