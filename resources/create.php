@@ -222,8 +222,15 @@ echo '
         <span>Passwort:</span>
         <input type="text" name="pass" value="" required><br>
         <span></span> Diese Anmeldedaten solltest du aufschreiben/im Passwortmanager speichern.
-    </label><br>
-    <input type="submit" value="Verbindung prüfen">
+    </label><br>';
+
+if (isset($mysqli)) {
+    echo '<p style="padding: 1em; font-size: 120%; background-color: #ffb8b8">
+        <b>Warnung</b>: Wenn du fortfährst, wird die bestehende Installation überschrieben.
+    </p>';
+}
+
+echo '<input type="submit" value="Verbindung prüfen">
 </form>';
 
 
