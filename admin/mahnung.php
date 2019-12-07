@@ -6,6 +6,8 @@ require_once 'verifyAdmin.php';
 
 include 'header.php';
 
+use PHPMailer\PHPMailer\Exception;
+
 if (isset($_POST['mahnen'])) {
     $id = $mysqli->real_escape_string($_POST['mahnen']);
 
@@ -44,7 +46,7 @@ $meta[kontoinhaber]
 $now
 $meta[pageName]";
 
-        $htmlBody = preg_replace("~\r?\n?----\r?\n?~", '<hr style="border-top:none; border-left:none; border-right:none; border-bottom: 1px solid #aaaaaa;">', $text);
+        $htmlBody = preg_replace("~\r?\n?----\r?\n?~", '<hr style="border:none; border-bottom: 1px solid #aaaaaa;">', $text);
         $htmlBody = preg_replace("~(\r\n|\r|\n)~", '<br>', $htmlBody);
         $htmlBody = $heading . $htmlBody;
 
@@ -54,17 +56,19 @@ $meta[pageName]";
 
         echo $htmlBody;
 
-        require_once '../mailtemplate.inc.php';
+        require_once 'PHPMailer-master/src/Exception.php';
 
-        if (phpmailerSend($lastRow['email'], 'Mahnung', $htmlBody, $text)) {
+        try {
+            phpMailerSend($lastRow['email'], 'Mahnung', $htmlBody, $text);
+
             echo '<p>Erfolgreich verschickt!</p>
             <a href="bestelluebersicht.php" class="button primary">Zurück</a>';
-        } else {
-            echo '<p class="errorP">Fehler beim Senden!</p>
+        } catch (Exception $e) {
+            echo '<p class="errorP">Fehler beim Senden: ' . $e->errorMessage() . '</p>
             <a href="bestelluebersicht.php">Zurück</a>';
         }
     } else {
-        echo '<h1>Alle Rechnungen sind bereits bezahlt</h1>
+        echo '<h1>Alle Rechnungen sind bereits bezahlt.</h1>
         <a href="bestelluebersicht.php">Zurück</a>';
     }
 }

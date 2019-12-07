@@ -62,10 +62,16 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == 'nearly' &&
             <div style="height: 10px"></div>
             <label>
                 <span class="labelText">Passwort wiederholen:</span> <input type="password" name="passwort2">
-            </label>
-            <div style="height: 10px"></div>
-            <span class="labelText"></span>
-            <div class="g-recaptcha" data-sitekey="' . ReCaptchaPublic . '" style="display:inline-block"></div>
+            </label>';
+
+            if (ReCaptchaPublic !== '') {
+                echo '
+                <div style="height: 10px"></div>
+                <span class="labelText"></span>
+                <div class="g-recaptcha" data-sitekey="' . ReCaptchaPublic . '" style="display:inline-block"></div>';
+            }
+
+            echo '
             <div style="height: 10px"></div>
             <span class="labelText"></span> <input type="submit" value="Absenden">
             <a class="button" href="login.php">Abbrechen</a>

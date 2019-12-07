@@ -2,7 +2,7 @@
 
 ob_clean();
 
-@include '_part1.inc.php';
+include __DIR__.'/_part1.inc.php';
 
 if (isset($error) && $error === 'Nicht initialisiert') {
     echo '<div class="message">

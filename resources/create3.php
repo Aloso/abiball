@@ -112,13 +112,20 @@ if (($row = $name->fetch_assoc()) != null) {
 }
 
 include '../mailtemplate.inc.php';
+require 'PHPMailer-master/src/Exception.php';
+
+use PHPMailer\PHPMailer\Exception;
 
 $text = 'Dies ist eine Testnachricht.';
 
-$result = phpmailerSend($email, 'Dies ist ein Test', '<h1 style="margin-top:0">Test</h1>' . $text, $text);
+try {
+    phpMailerSend($email, 'Dies ist ein Test', '<h1 style="margin-top:0">Test</h1>' . $text, $text);
+} catch (Exception $e) {
+    echo '<span style="color: red">Email-Fehler: ' . $e->errorMessage() . '</span>';
+    exit;
+}
 
-if ($result) {
-    echo '<h1>Nächste Schritte</h1>
+echo '<h1>Nächste Schritte</h1>
 
     <ol>
         <li><a href="../index.php" target="_blank">Anmeldung</a><br>
@@ -135,7 +142,6 @@ if ($result) {
         <li><a href="../admin/pageTexts.php" target="_blank">Seitentexte anpassen</a><br>
             Zur Formatierung siehe Tipps am Seitenende.</li>
     </ol>';
-}
 
 ?>
 </body>

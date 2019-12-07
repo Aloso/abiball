@@ -5,6 +5,8 @@ require_once "resources/settings.inc.php";
 
 include "_part1.inc.php";
 
+use PHPMailer\PHPMailer\Exception;
+
 
 if (isset($_POST['email']) && isset($_POST['vorname']) && isset($_POST['nachname'])) {
 
@@ -63,11 +65,14 @@ Um Ihr Passwort zurückzusetzen, klicken Sie auf folgenden Link:<br><br><br>
 ' . date('d.m.Y H:i') . '<br>
 ' . $meta['pageName'];
 
-            if (!phpmailerSend($email, $subject, $htmlText, $text)) {
+            require_once 'PHPMailer-master/src/Exception.php';
+
+            try {
+                phpMailerSend($email, $subject, $htmlText, $text);
+            } catch (Exception $e) {
                 header('Location: login.php?message=resetEmailFailed');
                 exit;
             }
-
         }
 
         header('Location: login.php?message=resetEmailSent');
