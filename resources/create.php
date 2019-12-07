@@ -59,12 +59,11 @@ $htmlTop = '<!DOCTYPE html>
 <body>';
 
 if (isset($_POST['defaultPassword']) && isset($_POST['emailPassword']) &&
-        isset($_POST['recaptcha1']) && isset($_POST['recaptcha2']) &&
-        isset($_POST['host']) && isset($_POST['user']) && isset($_POST['name']) && isset($_POST['pass'])) {
+    isset($_POST['recaptcha1']) && isset($_POST['recaptcha2']) &&
+    isset($_POST['host']) && isset($_POST['user']) && isset($_POST['name']) && isset($_POST['pass'])) {
 
     if ($_POST['defaultPassword'] != '' && $_POST['emailPassword'] != '' &&
-            $_POST['recaptcha1'] != '' && $_POST['recaptcha2'] != '' &&
-            $_POST['host'] != '' && $_POST['user'] != '' && $_POST['name'] != '' && $_POST['pass'] != '') {
+        $_POST['host'] != '' && $_POST['user'] != '' && $_POST['name'] != '' && $_POST['pass'] != '') {
 
         $defaultPassword = $_POST['defaultPassword'];
         $emailPassword = $_POST['emailPassword'];
@@ -79,7 +78,8 @@ if (isset($_POST['defaultPassword']) && isset($_POST['emailPassword']) &&
 
         $mysqli = @new mysqli($host, $user, $pass, $name);
         if ($mysqli->connect_errno) {
-            echo '<div style="margin: 1em 0; font-size:120%">Verbindung fehlgeschlagen:<br>' . $mysqli->connect_errno . '</div>';
+            echo $htmlTop;
+            echo '<p style="font-size:120%; color: red">Verbindung fehlgeschlagen: ' . $mysqli->connect_error . '</p>';
         } else {
 
             $fileStr = /** @lang InjectablePHP */
@@ -120,7 +120,7 @@ define("DbPassword", "' . addslashes($pass) . '");
 
 $mysqli = @new mysqli(DbHost, DbUsername, DbPassword, DbDatabase);
 if ($mysqli->connect_errno) {
-    $error = \'Connect Error: \' . $mysqli->connect_errno;
+    $error = \'Connect Error: \' . $mysqli->connect_error;
     @include \'../error_message.inc.php\';
     include \'error_message.inc.php\';
 }
@@ -166,12 +166,12 @@ echo '
     <h2>Passwörter</h2>
     <label>
         <span>Standardpasswort:</span>
-        <input type="text" name="defaultPassword" value="Abitur17"><br>
+        <input type="text" name="defaultPassword" value="Abitur17" required><br>
         <span></span> Passwort, das jeder User für den ersten Login braucht
     </label><br>
     <label>
         <span>GMail Passwort:</span>
-        <input type="text" name="emailPassword" value=""><br>
+        <input type="text" name="emailPassword" value="" required><br>
         <span></span> Passwort des GMail Accounts, von dem die E-Mails gesendet werden sollen
     </label>
 
@@ -185,25 +185,26 @@ echo '
     <label>
         <span>Geheimer Schlüssel:</span>
         <input type="text" name="recaptcha2" value="" placeholder="z.B 6LfqlcYUAAAAACK_xWJTdcj5nh6XVFdCTG93Y0Dq">
-    </label>
+    </label><br>
+    <span></span> Lasse die Felder leer, wenn du reCAPTCHA deaktivieren willst.
 
     <h2>Verbindungseinstellungen</h2>
     <label>
         <span>Host:</span>
-        <input type="text" name="host" value="localhost"><br>
-        Lass dies unverändert, falls die Datenbank auf dem gleichen Server ist wie die Website!
+        <input type="text" name="host" value="localhost" required><br>
+        <span></span> Lass dies unverändert, falls die Datenbank auf dem gleichen Server ist wie die Website!
     </label><br>
     <label>
         <span>Name der Datenbank:</span>
-        <input type="text" name="name" value="">
+        <input type="text" name="name" value="" required>
     </label><br>
     <label>
         <span>Nutzername:</span>
-        <input type="text" name="user" value="">
+        <input type="text" name="user" value="" required>
     </label><br>
     <label>
         <span>Passwort:</span>
-        <input type="text" name="pass" value="">
+        <input type="text" name="pass" value="" required>
     </label><br>
     <input type="submit" value="Verbindung prüfen">
 </form>';

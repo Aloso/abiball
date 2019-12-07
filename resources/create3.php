@@ -82,7 +82,7 @@ if (!isset($_GET['email']) || !isset($_GET['host']) || !isset($_GET['name']) || 
     $pass = $_GET['pass'];
     $mysqli = @new mysqli($host, $user, $pass, $name);
     if ($mysqli->connect_errno) {
-        echo '<p>Fehler: ' . $mysqli->connect_errno . '</p>';
+        echo '<p>Fehler: ' . $mysqli->connect_error . '</p>';
         exit;
     } else {
         require_once 'settings.inc.php';

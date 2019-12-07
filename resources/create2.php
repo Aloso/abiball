@@ -71,7 +71,7 @@ if (!isset($_GET['host']) || !isset($_GET['name']) || !isset($_GET['user']) || !
     $pass = $_GET['pass'];
     $mysqli = @new mysqli($host, $user, $pass, $name);
     if ($mysqli->connect_errno) {
-        echo '<p style="color: red">Fehler: ' . $mysqli->connect_errno . '</p>';
+        echo '<p style="color: red">Fehler: ' . $mysqli->connect_error . '</p>';
         exit;
     }
 }
@@ -312,8 +312,7 @@ ALTER TABLE `reservierung`
                     $result->free();
                 } else if ($mysqli->errno != 0) {
                     echo $htmlTop;
-                    echo '<p style="color: red">Fehler!</p>';
-                    echo $mysqli->error;
+                    echo '<p style="color: red">Fehler: ' . $mysqli->error . '</p>';
                     exit;
                 }
             } while ($mysqli->next_result());
