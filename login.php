@@ -1,7 +1,11 @@
 <?php
 
 session_start();
-require_once "resources/settings.inc.php";
+include "resources/settings.inc.php";
+if (!defined(DbDatabase)) {
+    $error = 'Nicht initialisiert';
+    include 'error_message.inc.php';
+}
 
 include "_part1.inc.php";
 

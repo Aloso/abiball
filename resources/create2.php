@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <title>Seitenerstellung</title>
     <meta charset="utf-8">
@@ -58,7 +58,6 @@
     </style>
 </head>
 <body>
-Falls du hier nichts siehst, aktualisiere die Seite mit F5.
 <?php
 
 if (!isset($_GET['host']) || !isset($_GET['name']) || !isset($_GET['user']) || !isset($_GET['pass'])) {
@@ -71,7 +70,7 @@ if (!isset($_GET['host']) || !isset($_GET['name']) || !isset($_GET['user']) || !
     $pass = $_GET['pass'];
     $mysqli = @new mysqli($host, $user, $pass, $name);
     if ($mysqli->connect_errno) {
-        echo '<p>Fehler: ' . $mysqli->connect_errno . '</p>';
+        echo '<p style="color: red">Fehler: ' . $mysqli->connect_errno . '</p>';
         exit;
     }
 }
@@ -84,7 +83,7 @@ if (isset($_POST['email']) && isset($_POST['vorname']) && isset($_POST['nachname
         $vorname = $_POST['vorname'];
         $nachname = $_POST['nachname'];
         
-        $query = '-- phpMyAdmin SQL Dump
+        $query = /** @lang MySQL */ '-- phpMyAdmin SQL Dump
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
@@ -311,7 +310,7 @@ ALTER TABLE `reservierung`
                 if ($result = $mysqli->store_result()) {
                     $result->free();
                 } else {
-                    echo '<p>Fehler!</p>';
+                    echo '<p style="color: red">Fehler!</p>';
                     echo $mysqli->error;
                     break;
                 }
@@ -326,7 +325,7 @@ ALTER TABLE `reservierung`
             header("Location: create3.php?email=$email&host=$host&name=$name&user=$user&pass=$pass");
             exit;
         } else {
-            echo '<p>Fehler!</p>';
+            echo '<p style="color: red">Fehler!</p>';
         }
         
     } else {
@@ -335,7 +334,14 @@ ALTER TABLE `reservierung`
     
 }
 
-echo '<div style="margin: 1em 0; font-size:120%">Erfolgreich mit der Datenbank verbunden. Einstellungsdatei erstellt.</div>';
+if (!file_exists('settings.inc.php')) {
+    echo '<p style="color: red">Fehler: Die Einstellungsdatei konnte nicht erstellt werden. Bitte stelle sicher, dass PHP Schreibrechte hat.</p>
+    <p>Die einfachste Möglichkeit, um dies unter Linux sicherzustellen ist</p>
+    <pre style="font-family:monospace; font-size: 1.2em">sudo chmod a+rwx -Rf .</pre>';
+    exit;
+}
+
+echo '<div style="margin: 1em 0; font-size:120%; color:green">Erfolgreich mit der Datenbank verbunden. Einstellungsdatei erstellt.</div>';
 
 echo '<h1>Admin-Account</h1>
 

@@ -23,7 +23,7 @@ while (($row = $data->fetch_assoc()) != null) {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <title>Sitzplaner</title>
     <meta charset="utf-8">

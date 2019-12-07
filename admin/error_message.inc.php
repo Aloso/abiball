@@ -10,7 +10,7 @@ if (!isset($meta)) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <title><?php echo $meta['pageName'] ?></title>
     <meta charset="UTF-8">

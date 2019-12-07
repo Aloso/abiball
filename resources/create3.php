@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <title>Seitenerstellung</title>
     <meta charset="utf-8">
@@ -78,7 +78,13 @@ if (!isset($_GET['email']) || !isset($_GET['host']) || !isset($_GET['name']) || 
         echo '<p>Fehler: ' . $mysqli->connect_errno . '</p>';
         exit;
     } else {
-        include 'settings.inc.php';
+        if (!file_exists('settings.inc.php')) {
+            echo '<p style="color: red">Fehler: Die Einstellungsdatei konnte nicht erstellt werden. Bitte stelle sicher, dass PHP Schreibrechte hat.</p>
+            <p>Die einfachste Möglichkeit, um dies unter Linux sicherzustellen ist</p>
+            <pre>sudo chmod a+rwx -Rf --verbose .</pre>';
+            exit;
+        }
+        require_once 'settings.inc.php';
     }
 }
 

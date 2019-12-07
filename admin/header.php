@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <title>Admin-Bereich</title>
     <meta charset="UTF-8">

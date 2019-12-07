@@ -1,0 +1,4 @@
+.idea/
+phpmyadmin/
+*.iml
+/resources/settings.inc.php

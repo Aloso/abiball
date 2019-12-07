@@ -2,7 +2,7 @@
 
 session_start();
 session_unset();
-include "resources/settings.inc.php";
+require_once "resources/settings.inc.php";
 
 if (!isset($_GET['verificationString']) || !isset($_GET['id'])) {
     header("Location: login.php");
