@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+
+$htmlTop = '<!DOCTYPE html>
 <html lang="de">
 <head>
     <title>Seitenerstellung</title>
@@ -54,8 +56,7 @@
         }
     </style>
 </head>
-<body>
-<?php
+<body>';
 
 if (isset($_POST['defaultPassword']) && isset($_POST['emailPassword']) &&
         isset($_POST['recaptcha1']) && isset($_POST['recaptcha2']) &&
@@ -147,11 +148,12 @@ $loggedin = false;
 
             header("Location: create2.php?host=$host&name=$name&user=$user&pass=$pass");
         }
-
     } else {
+        echo $htmlTop;
         echo '<div style="margin: 1em 0; font-size:120%">Bitte alle Felder ausfüllen!</div>';
     }
-
+} else {
+    echo $htmlTop;
 }
 
 $ignoreFailedDbConnection = true;
@@ -187,7 +189,8 @@ echo '
     <h2>Verbindungseinstellungen</h2>
     <label>
         <span>Host:</span>
-        <input type="text" name="host" value="localhost">
+        <input type="text" name="host" value="localhost"><br>
+        Lass dies unverändert, falls die Datenbank auf dem gleichen Server ist wie die Website!
     </label><br>
     <label>
         <span>Name der Datenbank:</span>

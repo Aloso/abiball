@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include "resources/settings.inc.php";
+@include_once "resources/settings.inc.php";
 if (!isset($mysqli)) {
     $error = 'Nicht initialisiert';
     include 'error_message.inc.php';

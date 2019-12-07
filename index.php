@@ -1,7 +1,11 @@
 <?php
 
 session_start();
-require_once 'resources/settings.inc.php';
+@include_once 'resources/settings.inc.php';
+if (!isset($mysqli)) {
+    $error = 'Nicht initialisiert';
+    include 'error_message.inc.php';
+}
 require_once 'verifyLogin.inc.php';
 
 include '_part1a.inc.php';
@@ -16,7 +20,7 @@ if ($bestellungen != '0') {
     echo '<p>Sie haben bisher ' . $bestellungen . ' Karte(n) bestellt. Im
             <a href="profil.php">Profil</a> werden alle Ihre Bestellungen angezeigt.</p>
             <a class="button primary" href="rechnung.php">Rechnung als PDF-Dokument speichern</a>';
-    
+
     $data = $mysqli->query('SELECT SUM(preis) FROM bestellungen WHERE bezahlt = FALSE AND userID = ' . $userID);
     $unbezahlteBestellungen = $data->fetch_assoc()['SUM(preis)'];
     if ($unbezahlteBestellungen != '0' && $unbezahlteBestellungen != null) {
