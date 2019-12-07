@@ -26,9 +26,10 @@ function phpMailerSend($address, $subject, $htmlMailBody, $mailBody = '') {
         $mail->Password = WebmasterPassword;                  // GMail password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
+        $mail->setFrom('noreply@' . $_SERVER['HTTP_HOST'], $meta['pageName']);
     }
 
-    $mail->setFrom($meta['webmasterMail']);
+    $mail->setFrom($meta['webmasterMail'], $meta['pageName']);
     $mail->addAddress($address);
     $mail->addReplyTo($meta['webmasterMail']);
 

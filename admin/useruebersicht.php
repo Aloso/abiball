@@ -47,12 +47,6 @@ if (isset($_POST['text'])) {
             echo '<b>Fehler</b> beim Einfügen von "' . $x . '" (Falsches Format)';
         }
     }
-
-    echo '<script type="text/javascript">
-        setTimeout(function() {
-            window.location.href = window.location.href;
-        }, 4000);
-    </script>';
 }
 
 echo '<h1>Userübersicht</h1>

@@ -30,17 +30,6 @@ if (isset($_POST['url'])) {
         $changed = true;
     }
     else echo '<p><b>Fehler beim Updaten der URL!</b></p>';
-} else if ($meta['url'] == '') {
-    $arr = explode('admin/settings.php', $_SERVER['REQUEST_URI']);
-    $url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['SERVER_NAME'] . $arr[0];
-    $url = $mysqli->real_escape_string($url);
-    $success = $mysqli->query("UPDATE meta SET url = '$url'");
-
-    if ($success) {
-        $meta['url'] = $url;
-        $changed = true;
-    }
-    else echo '<p><b>Fehler beim Updaten der URL!</b></p>';
 }
 
 if (isset($_POST['pageSubtitle'])) {

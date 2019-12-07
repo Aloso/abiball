@@ -84,7 +84,10 @@ if (isset($_POST['email']) && isset($_POST['vorname']) && isset($_POST['nachname
         $vorname = $_POST['vorname'];
         $nachname = $_POST['nachname'];
 
-        $query = /** @lang MySQL */ '-- phpMyAdmin SQL Dump
+        $base_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . '/';
+
+        $query = /** @lang MySQL */
+            "-- phpMyAdmin SQL Dump
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
@@ -93,8 +96,8 @@ if (isset($_POST['email']) && isset($_POST['vorname']) && isset($_POST['nachname
 -- Server-Version: 10.1.21-MariaDB
 -- PHP-Version: 5.6.30
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";
+SET time_zone = \"+00:00\";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -125,7 +128,7 @@ CREATE TABLE `bestellungen` (
   `id` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL,
   `name` varchar(50) NOT NULL,
-  `bezahlt` tinyint(1) NOT NULL DEFAULT \'0\',
+  `bezahlt` tinyint(1) NOT NULL DEFAULT '0',
   `bestelltAm` int(11) NOT NULL,
   `bezahltAm` int(11) DEFAULT NULL,
   `preis` double NOT NULL,
@@ -169,9 +172,9 @@ CREATE TABLE IF NOT EXISTS `meta` (
   `bic` varchar(20) NOT NULL,
   `kontonr` varchar(20) NOT NULL,
   `blz` varchar(20) NOT NULL,
-  `reservierungAktiviert` tinyint(1) NOT NULL DEFAULT \'0\',
-  `reservierungsPunkte` smallint(5) UNSIGNED NOT NULL DEFAULT \'6\',
-  `maxReservierungen` smallint(5) UNSIGNED NOT NULL DEFAULT \'3\'
+  `reservierungAktiviert` tinyint(1) NOT NULL DEFAULT '0',
+  `reservierungsPunkte` smallint(5) UNSIGNED NOT NULL DEFAULT '6',
+  `maxReservierungen` smallint(5) UNSIGNED NOT NULL DEFAULT '3'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -179,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `meta` (
 --
 
 INSERT INTO `meta` (`url`, `pageName`, `pageSubtitle`, `googleMaps`, `webmasterMail`, `webmasterAdress`, `loginTimeout`, `currentRound`, `availableCards`, `perUser`, `preis`, `zahlungsFrist`, `kontoinhaber`, `iban`, `bic`, `kontonr`, `blz`) VALUES
-(\'\', \'Abiball 2017 des LMGU\', \'18. September 2017 &bull; Backstage München\', \'<iframe src=\"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d941.2308162181648!2d11.52165585788617!3d48.14489589252878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sde!2sde!4v1490131822677\" style=\"width:100%\" height=\"400\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>\', \'' . $email . '\', \'Max Mustermann<br>Musterstraße 14<br>12345 Mustern\', 7200, 1, 5, 1, 40, \'03.08.2017\', \'Max Mustermann\', \'DE01234567899876543210\', \'1234567890\', \'9876543210\', \'LaLaLa\');
+('$base_url', 'Abiball 2017 des LMGU', '18. September 2017 &bull; Backstage München', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d941.2308162181648!2d11.52165585788617!3d48.14489589252878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sde!2sde!4v1490131822677\" style=\"width:100%\" height=\"400\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>', '$email', 'Max Mustermann<br>Musterstraße 14<br>12345 Mustern', 7200, 1, 5, 1, 40, '03.08.2017', 'Max Mustermann', 'DE01234567899876543210', '1234567890', '9876543210', '87654321');
 
 -- --------------------------------------------------------
 
@@ -197,12 +200,12 @@ CREATE TABLE `seitentexte` (
 --
 
 INSERT INTO `seitentexte` (`name`, `htmlText`) VALUES
-(\'Admin-Text\', \'Dieser Bereich ist für Administratoren gedacht. Ein Administrator hat vollen Zugriff auf die Seite. Er kann Nutzer erstellen, löschen, deren Rechte ändern, deren Daten auslesen, Kartenbestellungen löschen, verändern und vieles mehr. <i>Daher ist es wichtig, dass mit dieser Verantwortung sorfältig umgegangen wird.</i>\'),
-(\'Aktuelles\', \'<h1>Aktuelle Informationen</h1>Die Kartenbestellung wird voraussichtlich am 3. August freigeschaltet. Es stehen ca. 700 Karten zur Verfügung.<br><br>Wir suchen noch freiwillige Abiturienten fürs Orga-Team! Bei Interesse bitte hier melden:<br>orgateam-abiball@fake.de<br><br>Zur Vorbereitung auf den Abiball bieten wir einen Tanz-Crashkurs an. Dieser findet zwischen dem 5. und dem 9. August täglich um 16.00 in E118 statt. Anmeldung mündlich bei Eliza. Bitte kommt wenn möglich mit einem Tanzpartner / einer Tanzpartnerin.<br><br>Mitfahrgelegenheiten werden von Sebastian (sebastian.kuemmel@fake.de) vermittelt. Bitte meldet euch, wenn ihr einen freien Platz im Auto sucht oder anbieten könnt.\'),
-(\'Bestellung\', \'<h2>Alles, was Sie wissen müssen</h2><ul><li>Eine Karte für den Abiball kostet <b><span class=\"preis\">40</span> Euro</b> und muss auf folgendes Konto überwiesen werden:<table><tr><td>Kontoinhaber</td><td><span class=\"kontoinhaber\">Max Mustermann</span></td></tr><tr><td>IBAN</td><td><span class=\"iban\">DE01234567899876543210</span></td></tr><tr><td>Verwendungszweck</td><td>Abiball Eintrittskarten für [Name]</td></tr></table>(wobei Sie [Name] durch Ihren Namen ersetzen)</li><li>Bitte bezahlen Sie Ihre Karten <b>gesammelt</b>, falls Sie mehrere Karten bestellen.</li><li>Eine Karte kann im Allgemeinen nicht storniert, dafür aber auf eine andere Person übertragen werden.</li><li>Hierbei handelt es sich um einen <i>Privatverkauf</i>.</li></ul>\'),
-(\'Impressum\', \'<h1>Impressum</h1>Diese Website ist ausschließlich für Abiturienten und Angestellte des Lise-Meitner-Gymnasiums Unterhaching gedacht. Hier können Karten für den Abiturball 2017 bestellt werden. Die Bezahlung der Karten wird per Überweisung abgewickelt.<br><br>Die Website ist privat, daher entfallen AGB und Datenschutzbestimmungen.<h2>Ansprechpartner</h2><span class=\"webmasterAdress\">Max Mustermann<br>Musterstraße 14<br>12345 Mustern</span><br>E-Mail: <span class=\"webmasterMail\">max-mustermann@example.com</span><h2>Entwicklung und Design</h2>Ludwig Stecher\'),
-(\'Location\', \'<h1>Location</h1>Der Abiball findet dieses Jahr im großartigen XXXXXXXXXXXXXXXXX statt! Parkplätze sind ausreichend vorhanden, außerdem ist der S-Bahnhof XXXXXXXXXXX nur 5 Minuten entfernt.<br><br><span class=\"googleMaps\"><iframe src=\"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d941.2308162181648!2d11.52165585788617!3d48.14489589252878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sde!2sde!4v1490131822677\" style=\"width:100%\" height=\"400\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe></span>\'),
-(\'Menü\', \'<h1>Menü</h1>Für das Essen ist der Catering-Service <b>\"Abiball-Catering Schröder\"</b> verantwortlich. Dieser wird uns mit einem abwechslungsreichen Drei-Gänge-Menü verwöhnen. Uns wurde garantiert, dass auch für Vegetarier und Veganer gesorgt ist.<br><br>Allergiker werden gebeten, sich vorher Samuel zu wenden: samuel-pfoertsch@fake.de\');
+('Admin-Text', 'Dieser Bereich ist für Administratoren gedacht. Ein Administrator hat vollen Zugriff auf die Seite. Er kann Nutzer erstellen, löschen, deren Rechte ändern, deren Daten auslesen, Kartenbestellungen löschen, verändern und vieles mehr. <i>Daher ist es wichtig, dass mit dieser Verantwortung sorfältig umgegangen wird.</i>'),
+('Aktuelles', '<h1>Aktuelle Informationen</h1>Die Kartenbestellung wird voraussichtlich am 3. August freigeschaltet. Es stehen ca. 700 Karten zur Verfügung.<br><br>Wir suchen noch freiwillige Abiturienten fürs Orga-Team! Bei Interesse bitte hier melden:<br>orgateam-abiball@fake.de<br><br>Zur Vorbereitung auf den Abiball bieten wir einen Tanz-Crashkurs an. Dieser findet zwischen dem 5. und dem 9. August täglich um 16.00 in E118 statt. Anmeldung mündlich bei Eliza. Bitte kommt wenn möglich mit einem Tanzpartner / einer Tanzpartnerin.<br><br>Mitfahrgelegenheiten werden von Sebastian (sebastian.kuemmel@fake.de) vermittelt. Bitte meldet euch, wenn ihr einen freien Platz im Auto sucht oder anbieten könnt.'),
+('Bestellung', '<h2>Alles, was Sie wissen müssen</h2><ul><li>Eine Karte für den Abiball kostet <b><span class=\"preis\">40</span> Euro</b> und muss auf folgendes Konto überwiesen werden:<table><tr><td>Kontoinhaber</td><td><span class=\"kontoinhaber\">Max Mustermann</span></td></tr><tr><td>IBAN</td><td><span class=\"iban\">DE01234567899876543210</span></td></tr><tr><td>Verwendungszweck</td><td>Abiball Eintrittskarten für [Name]</td></tr></table>(wobei Sie [Name] durch Ihren Namen ersetzen)</li><li>Bitte bezahlen Sie Ihre Karten <b>gesammelt</b>, falls Sie mehrere Karten bestellen.</li><li>Eine Karte kann im Allgemeinen nicht storniert, dafür aber auf eine andere Person übertragen werden.</li><li>Hierbei handelt es sich um einen <i>Privatverkauf</i>.</li></ul>'),
+('Impressum', '<h1>Impressum</h1>Diese Website ist ausschließlich für Abiturienten und Angestellte des Lise-Meitner-Gymnasiums Unterhaching gedacht. Hier können Karten für den Abiturball 2017 bestellt werden. Die Bezahlung der Karten wird per Überweisung abgewickelt.<br><br>Die Website ist privat, daher entfallen AGB und Datenschutzbestimmungen.<h2>Ansprechpartner</h2><span class=\"webmasterAdress\">Max Mustermann<br>Musterstraße 14<br>12345 Mustern</span><br>E-Mail: <span class=\"webmasterMail\">max-mustermann@example.com</span><h2>Entwicklung und Design</h2>Ludwig Stecher'),
+('Location', '<h1>Location</h1>Der Abiball findet dieses Jahr im großartigen XXXXXXXXXXXXXXXXX statt! Parkplätze sind ausreichend vorhanden, außerdem ist der S-Bahnhof XXXXXXXXXXX nur 5 Minuten entfernt.<br><br><span class=\"googleMaps\"><iframe src=\"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d941.2308162181648!2d11.52165585788617!3d48.14489589252878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sde!2sde!4v1490131822677\" style=\"width:100%\" height=\"400\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe></span>'),
+('Menü', '<h1>Menü</h1>Für das Essen ist der Catering-Service <b>\"Abiball-Catering Schröder\"</b> verantwortlich. Dieser wird uns mit einem abwechslungsreichen Drei-Gänge-Menü verwöhnen. Uns wurde garantiert, dass auch für Vegetarier und Veganer gesorgt ist.<br><br>Allergiker werden gebeten, sich vorher Samuel zu wenden: samuel-pfoertsch@fake.de');
 
 -- --------------------------------------------------------
 
@@ -216,8 +219,8 @@ CREATE TABLE `user` (
   `vorname` varchar(30) NOT NULL,
   `nachname` varchar(30) NOT NULL,
   `passwordHash` varchar(200) CHARACTER SET ascii NOT NULL,
-  `status` varchar(15) NOT NULL DEFAULT \'inactive\' COMMENT \'inactive/incomplete/member/admin/blocked\',
-  `lastActive` int(10) UNSIGNED NOT NULL DEFAULT \'0\',
+  `status` varchar(15) NOT NULL DEFAULT 'inactive' COMMENT 'inactive/incomplete/member/admin/blocked',
+  `lastActive` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `verificationString` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -226,7 +229,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `vorname`, `nachname`, `passwordHash`, `status`, `lastActive`, `verificationString`) VALUES
-(1, \'' . $email . '\', \'' . $vorname . '\', \'' . $nachname . '\', \'$2y$10$EEv5NQb5JKP80EKmog/IYu.0TiFDhAmYmiDehJZYYzVbvE5fVbU1e\', \'admin\', 0, \'\');
+(1, '$email', '$vorname', '$nachname', '\$2y\$10\$EEv5NQb5JKP80EKmog/IYu.0TiFDhAmYmiDehJZYYzVbvE5fVbU1e', 'admin', 0, '');
 
 
 CREATE TABLE `reservierung` (
@@ -302,7 +305,7 @@ ALTER TABLE `reservierung`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-';
+";
 
 
         $success = $mysqli->multi_query($query);
@@ -356,7 +359,7 @@ echo '<h1>Admin-Account</h1>
         <span>E-Mailadresse:</span>
         <input type="text" name="email" value=""><br>
         <span></span> Falls du SMTP verwendest, muss dies eine GMail-Adresse sein.<br>
-        <span></span> Ansonsten wähle eine E-Mailadresse auf der Domain des Webservers (z.B. webmaster@deine.domain.de)
+        <span></span> Ansonsten wähle eine beliebige E-Mailadresse, auf die du Zugriff hast.
     </label><br>
     <label>
         <span>Vorname:</span>
@@ -368,7 +371,7 @@ echo '<h1>Admin-Account</h1>
     </label>
 
     <p>
-        Falls du eine GMail-Adresse verwendest,
+        Falls du eine SMTP verwendest,
         <a href="https://www.google.com/settings/security/lesssecureapps" target="_blank">aktiviere weniger sicher Apps</a>,
         bevor du fortfährst.
     </p>

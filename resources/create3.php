@@ -95,13 +95,13 @@ echo '<h1>E-Mailadresse verifizieren</h1>
 
 <p>
     Möglicherweise bekommst du in den nächsten Minuten die Nachricht, dass jemand versucht hat,
-    sich bei deinem GMail Account einzuloggen. Bestätige, dass du das selbst warst.
+    sich in deinem E-Mailaccount einzuloggen. Bestätige, dass du das selbst warst.
     Aktualisiere dann diese Seite, um die E-Mail erneut zu senden.
 </p>
 
 <p>
     <b>Fahre erst fort, wenn du die Testnachricht empfangen hast!</b>
-    Falls E-Mailadresse bzw. Passwort falsch ist, <a href="create.php">klicke hier</a>.
+    Falls E-Mailadresse oder Passwort falsch ist, <a href="create.php">fange nochmal von vorne an</a>.
 </p>';
 
 $name = $mysqli->query("SELECT * FROM user WHERE id = 1");
@@ -111,8 +111,8 @@ if (($row = $name->fetch_assoc()) != null) {
     $name = 'deinem Namen';
 }
 
-include '../mailtemplate.inc.php';
-require 'PHPMailer-master/src/Exception.php';
+include __DIR__.'/../mailtemplate.inc.php';
+require __DIR__.'/../PHPMailer-master/src/Exception.php';
 
 use PHPMailer\PHPMailer\Exception;
 
@@ -121,7 +121,7 @@ $text = 'Dies ist eine Testnachricht.';
 try {
     phpMailerSend($email, 'Dies ist ein Test', '<h1 style="margin-top:0">Test</h1>' . $text, $text);
 } catch (Exception $e) {
-    echo '<span style="color: red">Email-Fehler: ' . $e->errorMessage() . '</span>';
+    echo '<p style="color: red">Fehler: ' . $e->errorMessage() . '</p>';
     echo '<p>Falls die Verbindung fehlschlägt, kann daran SMTP schuld sein.
     Manche Server (z.B. bplaced, GoDaddy) verbieten SMTP-Verbindungen. Um dies zu umgehen,
     <a href="create.php">starte die Installation neu</a> und lasse das Gmail-Passwort leer.';

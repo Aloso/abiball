@@ -166,12 +166,12 @@ echo '
     <h2>Passwörter</h2>
     <label>
         <span>Standardpasswort:</span>
-        <input type="text" name="defaultPassword" value="Abitur17" required><br>
+        <input type="text" name="defaultPassword" value="Abitur" required><br>
         <span></span> Passwort, das jeder User für den ersten Login braucht
     </label><br>
     <label>
         <span>GMail Passwort:</span>
-        <input type="text" name="emailPassword" value="" required><br>
+        <input type="text" name="emailPassword" value=""><br>
         <span></span> Passwort des GMail Accounts, von dem die E-Mails gesendet werden sollen
         <p>
             Für den E-Mailversand wird normalerweise SMTP verwendet, da die E-Mails dann seltener als Spam eingestuft werden.
