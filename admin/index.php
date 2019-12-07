@@ -52,5 +52,19 @@ if ($lastActiveUser->num_rows != 0) {
     echo '<p>In der letzten Stunde waren keine Nutzer aktiv.</p>';
 }
 
+echo '
+<h1>Gefahrenzone</h1>
+<p>
+    <b>Warnung</b>: Wenn du die Seite zurücksetzt, werden sämtliche Daten gelöscht –
+    einschließlich User, Bestellungen, Einstellungen und Seitentexte. Dies kann <i>nicht</i> rückgängig gemacht werden.
+</p>
+<p>
+    Um die Seite zurückzusetzen, muss die Installation erneut durchgeführt werden:
+</p>
+<p>
+    <a class="button primary" style="background-color: #bc0000; border-color: darkred" href="../resources/create.php">Seite zurücksetzen</a>
+</p>
+';
+
 
 include 'footer.php';

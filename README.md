@@ -9,6 +9,8 @@ Die Testumgebung ist [wieder online](http://abiball-demo.bplaced.net).
  - User-Account: Rabe Socke, Passwort 12345678
  - Admin-Account: Meister Eder, Passwort 12345678
 
+Die Testumgebung nutzt einen kostenlosen Service mit begrenzten Funktionen, daher ist reCAPTCHA und SMTP leider deaktiviert.
+
 Falls du mehr über das Projekt wissen willst, kannst du mich direkt [auf Telegram](https://t.me/joinchat/AAAAAEF9Ddvu9ancJ730zA) anschreiben.
 
 ## Idee und Entwicklung
@@ -26,19 +28,18 @@ Die Website achtet darauf, alle Eingaben zu bereinigen und ist auf Sichheit beda
 
 Dieses Paket benötigt:
 
- - Einen Server mit PHP 5 oder PHP 7
+ - Einen Server mit PHP 7
     - falls du PHP manuell installierst, achte darauf, dass die Erweiterungen `mysqli` und `iconv` in der `php.ini` aktiviert sind und PHP Schreibrechte hat
  - Eine leere MySql- oder MariaDB-Datenbank
-    - Ein Datenbank-Nutzer mit allen Rechten für diese Datenbank (und einem sehr sicheren Passwort!)
  - Eine Domain oder Subdomain, auf der die Seite läuft (dies muss _kein_ Root-Verzeichnis sein)
- - Einen Gmail-Account
+ - Einen Gmail-Account, falls du reCAPTCHA und/oder SMTP verwenden willst (empfohlen)
 
 ## Installation
 
- 1. Hochladen der Dateien auf einen Webserver
- 2. Erstellen einer Datenbank und eines zugehörigen DB-Nutzers
- 3. Öffnen der Datei „resources/create.php“ im Browser
- 4. Folgen der Anweisungen, bis die Seite einsatzbereit ist
+ 1. Lade die Dateien auf deinen Webserver hoch
+ 2. Erstelle eine Datenbank und einen zugehörigen DB-Nutzer
+ 3. Öffne die Website im Browser
+ 4. Folge den Anweisungen, bis die Seite einsatzbereit ist
 
 ## Funktionen
 
@@ -76,6 +77,7 @@ Der Admin hat alle Möglichkeiten, die ein User hat. Zusätzlich hat er folgende
 * Einstellungen ändern. Dadurch kann das Aussehen der Seite und das Verhalten der Kartenbestellung verändert werden.
 * Seitentexte ändern. Zur Formatierung stehen Überschriften, fetter / kursiver Text, Listen, Tabellen, Links etc. zur Verfügung. Diese stehen am Seitenende.
 * Sitzplaner: Hier kann der Admin die optimale Sitzordnung herausfinden.
+* Website zurücksetzen
 
 ## Mobile Seite
 Die Website ist für mobile Geräte verschiedener Größen optimiert. Keine Umleitung etc. nötig.
@@ -97,7 +99,7 @@ Wenn alle Wünsche angekommen sind, öffnen die Administratoren den Sitzplaner u
 
 ## Website zurücksetzen
 
-Die Website kann zurückgesetzt werden, indem die zuvor gelöschten Dateien _create.php_, _create2.php_ und _create3.php_ wieder im Ordner _resources_ eingefügt werden und die Installation erneut durchgeführt wird.
+Die Website kann im Adminbereich zurückgesetzt werden, indem der Installationsprozess erneut durchgeführt wird.
 
 ## Rechte & Werbung
 Die Website benutzt ausschließlich selber produziertes Material oder solches, dass Lizenzfrei (oder unter freien Lizenzen) zu haben ist.

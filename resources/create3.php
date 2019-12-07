@@ -134,15 +134,9 @@ echo '<h1>Nächste Schritte</h1>
         <li><a href="../index.php" target="_blank">Anmeldung</a><br>
             Dein Passwort: <b>adminadmin</b></li>
         <li><a href="../changePassword.php" target="_blank">Passwort ändern</a></li>
-        <li><b>Lösche</b> folgende Dateien im <i>resources</i> Ordner:
-            <ul>
-                <li>create.php</li>
-                <li>create2.php</li>
-                <li>create3.php</li>
-            </ul></li>
         <li><a href="../admin/settings.php" target="_blank">Einstellungen anpassen</a></li>
-        <li><a href="../admin/useruebersicht.php" target="_blank">Die User hinzufügen</a></li>
         <li><a href="../admin/pageTexts.php" target="_blank">Seitentexte anpassen</a><br>
+        <li><a href="../admin/useruebersicht.php" target="_blank">Die User hinzufügen</a></li>
             Zur Formatierung siehe Tipps am Seitenende.</li>
     </ol>';
 

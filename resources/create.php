@@ -1,5 +1,16 @@
 <?php
 
+@include_once __DIR__.'/settings.inc.php';
+if (isset($mysqli)) {
+    // Falls die Einstellungen vorhanden sind, muss der Nutzer eingeloggt sein
+    session_start();
+    require_once __DIR__.'/../verifyLogin.inc.php';
+    if ($status !== 'admin') {
+        echo 'Keine Berechtigung';
+        exit;
+    }
+}
+
 $htmlTop = '<!DOCTYPE html>
 <html lang="de">
 <head>
@@ -209,7 +220,8 @@ echo '
     </label><br>
     <label>
         <span>Passwort:</span>
-        <input type="text" name="pass" value="" required>
+        <input type="text" name="pass" value="" required><br>
+        <span></span> Diese Anmeldedaten solltest du aufschreiben/im Passwortmanager speichern.
     </label><br>
     <input type="submit" value="Verbindung prüfen">
 </form>';
