@@ -191,8 +191,8 @@ echo '
         </p>
     </label>
 
-    <h2>ReCaptcha</h2>
-    Gehe auf <b><a href="https://www.google.com/recaptcha/">diese Website</a></b> und erstelle ein <b>reCAPTCHA, Version 2</b>.<br>
+    <h2>reCAPTCHA</h2>
+    Gehe auf <b><a href="https://www.google.com/recaptcha/">diese Website</a></b> und erstelle ein <b>reCAPTCHA, Version 2</b>.
     Gib dann die reCAPTCHA-Schlüssel hier an:<br>
     <label>
         <span>Websiteschlüssel:</span>
@@ -204,7 +204,7 @@ echo '
     </label><br>
     <span></span> Lasse die Felder leer, wenn du reCAPTCHA deaktivieren willst.
 
-    <h2>Verbindungseinstellungen</h2>
+    <h2>Datenbank</h2>
     <label>
         <span>Host:</span>
         <input type="text" name="host" value="localhost" required><br>
